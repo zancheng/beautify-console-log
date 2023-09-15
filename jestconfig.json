@@ -1,0 +1,10 @@
+{
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "snapshotSerializers": ["miniprogram-simulate/jest-snapshot-plugin"],
+    "testRegex": "(<rootDir>/src/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}
+  

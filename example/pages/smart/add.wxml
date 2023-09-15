@@ -1,0 +1,30 @@
+<!--pages/smart/add.wxml-->
+<view>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+      
+      <view class="page-section">
+        <view class="page-section-title">智能名称</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd" style="margin: 30rpx 0" >
+              <input class="weui-input" value="{{form.smartName}}" name="smartName" placeholder="请输入智能名称" />
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="page-section">
+        <view class="page-section-title">智能图标</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd" style="margin: 30rpx 0" >
+              <input class="weui-input" value="{{form.smartIcon}}" name="smartIcon" disabled="true" placeholder="" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button style="margin: 30rpx 0" type="primary" formType="submit">确定</button>
+      </view>
+    </form>
+</view>

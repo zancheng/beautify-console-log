@@ -1,0 +1,10 @@
+<!--pages/floor/index.wxml-->
+<!-- 4.0智能服务器不支持添加、修改、删除楼层 -->
+<view class="word-break">
+  <view wx:for="{{list}}" wx:key="index" class="item">
+    <view class="item-title">{{item.floorName}}(floorId : {{item.floorId}})</view>
+    <button wx:if="{{isSmall}}" class="mini-btn" type="primary" size="mini" bind:tap="edit" data-id="{{item.floorId}}" data-name="{{item.floorName}}">修改楼层信息</button>
+    <button wx:if="{{isSmall}}" class="mini-btn" type="warn" size="mini" bind:tap="deleteFloor" data-id="{{item.floorId}}" data-name="{{item.floorName}}">删除楼层</button>
+  </view>
+  <button wx:if="{{isSmall}}" class="mini-btn" type="primary" size="mini" bind:tap="add">添加楼层</button>
+</view>

@@ -1,0 +1,24 @@
+<!--pages/host/access_network.wxml-->
+<view>
+  <form catchsubmit="formSubmit">
+      <view class="page-section">
+        <view class="page-section-title">
+          当前智能服务器入网状态：{{state ? '入网中' : '空闲'}}
+          <button wx:if="{{state}}" class="mini-btn" type="warn" size="mini" bind:tap="close">关闭入网状态</button>
+        </view>
+        <view class="page-section-title">入网设备deviceModel</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd" style="margin: 30rpx 0" >
+              <input class="weui-input" value="{{form.deviceModel}}" disabled="" name="deviceModel" placeholder="入网设备deviceModel" />
+            </view>
+          </view>
+        </view>
+      </view>
+      
+
+      <view class="btn-area">
+        <button style="margin: 30rpx 0" type="primary" formType="submit">确定</button>
+      </view>
+    </form>
+</view>

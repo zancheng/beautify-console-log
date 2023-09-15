@@ -1,0 +1,29 @@
+<!--pages/smart/index.wxml-->
+<view class="word-break">
+  <!-- <view wx:for="{{list}}" wx:key="index" class="item">
+    <view class="item-title">{{item.smartName}}(smartId : {{item.smartId}} 所属房间: {{item.roomName}})</view>
+    <button class="mini-btn" type="primary" size="mini" bind:tap="command" data-id="{{item.smartId}}">触发</button>
+  </view> -->
+  <swiper style="height: 100vh;">
+        <block wx:for="{{smartData}}" wx:key="smartId" wx:for-item="smart">
+          <swiper-item>
+            <scroll-view
+              type="list"
+              scroll-y
+              style="height: 100vh;"
+            >
+              <view>{{smart.label}}（{{smart.list.length}}个）</view>
+              <button wx:if="{{smart.type === 'auto' || smart.type === 'manual' || smart.type === 'timing'}}" class="mini-btn" type="primary" size="mini" bind:tap="add" data-type="{{smart.type}}">添加</button>
+              <view wx:for="{{smart.list}}" wx:key="index" class="item" wx:for-item="child">
+              <view class="item-title">{{child.smartName}}(smartId : {{child.smartId}} 所属房间: {{child.roomName}} {{child.roomId}})</view>
+                <button class="mini-btn" type="default" size="mini" bind:tap="command" data-type="{{smart.type}}" data-id="{{child.smartId}}">触发</button>
+                <block wx:if="{{smart.type === 'auto' || smart.type === 'manual' || smart.type === 'timing'}}">
+                  <button class="mini-btn" type="primary" size="mini" bind:tap="editSmart" data-type="{{smart.type}}" data-id="{{child.smartId}}" data-name="{{child.smartName}}">修改</button>
+                  <button class="mini-btn" type="warn" size="mini" bind:tap="deleteSmart" data-type="{{smart.type}}" data-id="{{child.smartId}}">删除</button>
+                </block>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </block>
+      </swiper>
+</view>

@@ -1,0 +1,17 @@
+.navigator-hover {
+  color:blue;
+}
+.other-navigator-hover {
+  color:red;
+}
+.btn-area {
+  padding: 10px;
+}
+.btn-area navigator {
+  background-color: #51f;
+  margin-bottom: 10px;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+}
