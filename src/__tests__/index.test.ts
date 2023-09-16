@@ -1,4 +1,3 @@
-const simulate = require('miniprogram-simulate');
 const path = require('path');
 
 import { BeautifyConsole } from '../beautify-console';

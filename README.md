@@ -1,4 +1,4 @@
-#Beauty console
+#Beautify console
 
 
 
