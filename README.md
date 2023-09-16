@@ -1,50 +1,98 @@
-# beautify-console
-
-#### 介绍
-这是“console”对象的进一步美化和封装，包括console.log、console.info、console.warn、console.error。
-可以加入自定义的console打印前缀、对内容进行美化（规则参考 https://developer.mozilla.org/en-US/docs/Web/API/Console ），可随时关闭console打印
-
-#### 软件架构
-软件架构说明
+#Beauty console
 
 
-#### 安装教程
+
+#### Introduction
+
+This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.
+
+You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ）, can close console printing at any time
+
+
+
+#### Software Architecture
+
+Software Architecture Description
+
+
+
+
+#### Installation Tutorial
+
+
 
 ```
-npm i beautify-console --save
-```
-或
-```
-yarn add beautify-console
+
+npm i beauty-console -- save
+
 ```
 
-#### 使用说明
+or
 
-1.  简单使用
 ```
+
+yarn add beauty-console
+
+```
+
+
+
+#### Instructions for use
+
+
+
+1. Simple use
+
+```
+
 const log = BeautifyConsole.getInstance();
-// 使用方式与正常的console.info()一致
-log.info(1234, '4', [3, 5]);
+
+//The usage is consistent with the normal console.info()
+
+Log.info(1234, '4', [3, 5]);
+
+
 
 ```
 
-2.  支持的console类型
-```
-const log = BeautifyConsole.getInstance();
-log.info(1234, '4', [3, 5]);
-log.log(1234, '4', [3, 5]);
-log.warn(1234, '4', [3, 5]);
-log.error(1234, '4', [3, 5]);
-```
-3.  加入自定义console日志头
-```
-const log = BeautifyConsole.getInstance();
-log.setPadStartText('log', 'hello world').info(1234, '4', [3, 5]);
+
+
+2. Supported console types
+
 ```
 
-#### 参与贡献
+const log = BeautifyConsole. getInstance();
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+Log.info(1234, '4', [3, 5]);
+
+Log.log(1234, '4', [3, 5]);
+
+Log.warn(1234, '4', [3, 5]);
+
+Log.error(1234, '4', [3, 5]);
+
+```
+
+3. Add custom console log headers
+
+```
+
+const log = BeautifyConsole. getInstance();
+
+Log.setPadStartText('log ','hello world').info(1234,'4 ', [3, 5]);
+
+```
+
+
+
+#### Participation contribution
+
+
+
+1. Fork warehouse
+
+2. Create a new Feat_ Xxx branch
+
+3. Submit Code
+
+4. Create a new Pull Request
