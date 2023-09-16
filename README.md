@@ -1,4 +1,4 @@
-# consoleLog
+# beautify-console
 
 #### 介绍
 这是“console”对象的进一步美化和封装，包括console.log、console.info、console.warn、console.error。

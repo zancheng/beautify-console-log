@@ -1,36 +1,98 @@
-# consoleLog
+#Beauty console
 
-#### Description
-Further beautification and encapsulation of the 'console' object，including console.log, console.info, console.warn, console.error
+
+
+#### Introduction
+
+This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.
+
+You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ）, can close console printing at any time
+
+
 
 #### Software Architecture
-Software architecture description
 
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
-
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+Software Architecture Description
 
 
-#### Gitee Feature
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+#### Installation Tutorial
+
+
+
+```
+
+Npm i beauty console -- save
+
+```
+
+or
+
+```
+
+Yarn add beauty console
+
+```
+
+
+
+#### Instructions for use
+
+
+
+1. Simple use
+
+```
+
+Const log=BeautifyConsole. getInstance();
+
+//The usage is consistent with the normal console. info()
+
+Log. info (1234, '4', [3, 5]);
+
+
+
+```
+
+
+
+2. Supported console types
+
+```
+
+Const log=BeautifyConsole. getInstance();
+
+Log. info (1234, '4', [3, 5]);
+
+Log. log (1234, '4', [3, 5]);
+
+Log. warn (1234, '4', [3, 5]);
+
+Log. error (1234, '4', [3, 5]);
+
+```
+
+3. Add custom console log headers
+
+```
+
+Const log=BeautifyConsole. getInstance();
+
+Log. setPadStartText ('log ','hello world'). info (1234,'4 ', [3, 5]);
+
+```
+
+
+
+#### Participation contribution
+
+
+
+1. Fork warehouse
+
+2. Create a new Feat_ Xxx branch
+
+3. Submit Code
+
+4. Create a new Pull Request
