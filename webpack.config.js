@@ -10,22 +10,12 @@ module.exports = {
     // 指定打包文件所在的目录
     output:{
         // 利用path可完整拼出打包文件的目录
-        path:path.resolve(__dirname,'dist'),
+        path:path.resolve(__dirname,'dist/beautify-console'),
         // 打包后的文件
-        filename:'beautifyConsole.js',
+        filename:'index.js',
         libraryTarget: 'umd'
     },
-    devServer: {
-        proxy: {
-          '/gateway': {
-            target: 'http://devl-soft-gateway2.unisiot.com/gateway', //需要跨域的url
-            changeOrigin: true,
-            pathRewrite: {
-              '^/gateway': ''
-            }
-          }
-        }
-    },
+    devServer: {},
     optimization: {
         minimize: process.env.NODE_ENV === 'development' ? false : true
     },
@@ -45,10 +35,5 @@ module.exports = {
     resolve: {
         extensions:['.ts','.js']
     },
-    plugins: [
-        new webpack.ProvidePlugin({
-			process: 'process/browser', 
-			Buffer: ['buffer', 'Buffer']
-		})
-    ],
+    plugins: [],
 }

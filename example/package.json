@@ -1,8 +1,0 @@
-{
-  "name": "miniprogram-custom-component",
-  "version": "1.0.0",
-  "description": "",
-  "miniprogram": "dist",
-  "dependencies": {
-  }
-}

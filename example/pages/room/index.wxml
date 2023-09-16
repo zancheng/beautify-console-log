@@ -1,9 +1,0 @@
-<!--pages/room/index.wxml-->
-<view class="word-break">
-  <button class="mini-btn" type="primary" size="mini" bind:tap="add">添加房间</button>
-  <view wx:for="{{list}}" wx:key="index" class="item">
-    <view class="item-title">{{item.roomName}}(roomId : {{item.roomId}} 所属楼层: {{item.floorName}})</view>
-  <button class="mini-btn" type="primary" size="mini" bind:tap="edit" data-name="{{item.roomName}}" data-id="{{item.roomId}}" data-floorid="{{item.floorId}}">修改房间</button>
-  <button class="mini-btn" type="warn" size="mini" bind:tap="deleteRoom" data-id="{{item.roomId}}">删除房间</button>
-  </view>
-</view>

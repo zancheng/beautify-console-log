@@ -1,7 +1,7 @@
 const simulate = require('miniprogram-simulate');
 const path = require('path');
 
-import { initConfig, mqttClient, host } from '../index';
+import { BeautifyConsole } from '../beautify-console';
 
 // test('comp', () => {
 //   const id = simulate.load(path.join(__dirname, './comp/index')) // 加载自定义组件，返回组件 id
@@ -15,22 +15,29 @@ import { initConfig, mqttClient, host } from '../index';
 
 //   comp.detach() // 将组件从容器节点中移除，会触发 detached 生命周期
 // })
-test('SDK getHostInfo', (done) => {
-  // expect(Greeter('Carl')).toBe('Hello Carl');
-  initConfig({
-    token: 'fc64bf5a-bf19-498e-b0e5-fa855741339d',
-    appKey: 'e6x46ptx769gg1jyxx80dk7ts7s06gve',
-    appSecret: 'wdrsdnUE3DjjB9uaT2P6N1CayokGkgdg',
-    showLog: true
-  });
-  host.getHostInfo({
-    userUnique: 'fc64bf5a-bf19-498e-b0e5-fa855741339d',
-  }).then(res => {
-    console.log(res)
-    done()
-  }).catch(err => {
-    console.log(err)
-  })
+test('SDK getHostInfo', () => {
+  const log = BeautifyConsole.getInstance()
+
+  log.info(1234, '4', [3, 5])
+  expect(log.info(1234, '4', [3, 5])).toBe(undefined);
+
+  log.log(1234)
+  expect(log.log(1234)).toBe(undefined);
+
+  log.closeLog().warn(1234)
+  expect(log.closeLog().warn(1234)).toBe(undefined);
+
+  log.openLog().log(1234)
+  expect(log.openLog().log(1234)).toBe(undefined);
+
+  log.error(1234)
+  expect(log.error(1234)).toBe(undefined);
+
+  log.error(1234)
+  expect(log.error(1234)).toBe(undefined);
+
+  log.setPadStartText('log', 'hello world').log(1234)
+  expect(log.setPadStartText('log', 'hello world').log(1234)).toBe(undefined);
 });
 
 // todo 加入加解密测试

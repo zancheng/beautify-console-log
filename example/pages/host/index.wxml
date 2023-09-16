@@ -1,6 +1,0 @@
-<!--pages/host/index.wxml-->
-<view class="word-break">
-  <text user-select="true">{{content}}</text>
-  <button class="mini-btn" type="warn" size="mini" bind:tap="restart">重启智能服务器</button>
-  <button class="mini-btn" type="primary" size="mini" bind:tap="accessNetwork">设备入网</button>
-</view>

@@ -1,8 +1,0 @@
-<view class="btn-area">
-  <navigator url="/pages/host/index" hover-class="navigator-hover">智能服务器实例</navigator>
-  <navigator url="/pages/floor/index" hover-class="navigator-hover">楼层实例</navigator>
-  <navigator url="/pages/room/index" hover-class="navigator-hover">房间实例</navigator>
-  <navigator url="/pages/device/index" hover-class="navigator-hover">设备实例</navigator>
-  <navigator url="/pages/smart/index" hover-class="navigator-hover">智能实例</navigator>
-  <navigator url="/pages/topic/index" hover-class="navigator-hover">Topic监听实例</navigator>
-</view>

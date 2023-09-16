@@ -19,22 +19,13 @@
     "doc": "typedoc --options ./typedoc.json"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.5.0",
-    "buffer": "^6.0.3",
-    "crypto-js": "^4.1.1",
-    "miniprogram-automator": "^0.12.0",
-    "mqtt": "2.18.9"
-  },
+  "license": "Apache 2.0",
+  "dependencies": {},
   "devDependencies": {
-    "@types/crypto-js": "^4.1.2",
     "@types/jest": "^29.5.4",
-    "@types/ws": "^8.5.5",
     "cross-env": "^7.0.3",
     "jest": "^29.6.4",
     "jest-environment-jsdom": "^29.6.4",
-    "miniprogram-simulate": "^1.6.1",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
@@ -49,5 +40,5 @@
   "files": [
     "dist/**/*"
   ],
-  "repository": "https://gitee.com/cheng-zan/uiot-aiot-wechat-sdk.git"
+  "repository": "https://gitee.com/cheng-zan/beautify-console-log.git"
 }

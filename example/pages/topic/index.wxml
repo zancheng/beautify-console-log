@@ -1,6 +1,0 @@
-<view class="padding10">
-  <view>推送数据(请触发设备控制或等待推送)：</view>
-  <view wx:for="{{topicMessage}}" wx:key="index" class="line line-grey bg-grey">
-    <text user-select="true">{{item}}</text>
-  </view>
-</view>

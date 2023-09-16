@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+</head>
+<body>
+    <script src="./beautify-console/index.js"></script>
+    <script>
+        const log = BeautifyConsole.getInstance()
+
+        log.info(1234, '4', [3, 5])
+
+        log.log(1234)
+
+        log.closeLog().warn('no show')
+
+        log.openLog().log('show log')
+
+        log.error(1234)
+
+        log.setPadStartText('log', 'hello world').log(1234)
+    </script>
+</body>
+</html>
