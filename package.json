@@ -1,7 +1,8 @@
 {
   "name": "beautify-console-log",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.",
+  "keywords": [ "typescript", "js", "log", "console", "beautify", "控制台日志美化", "console.log美化" ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
