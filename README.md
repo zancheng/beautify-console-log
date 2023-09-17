@@ -23,7 +23,7 @@ Software Architecture Description
 
 ```
 
-npm i beauty-console -- save
+npm i beauty-console-log -- save
 
 ```
 
@@ -31,7 +31,7 @@ or
 
 ```
 
-yarn add beauty-console
+yarn add beauty-console-log
 
 ```
 

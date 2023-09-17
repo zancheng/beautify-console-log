@@ -11,11 +11,11 @@
 #### 安装教程
 
 ```
-npm i beautify-console --save
+npm i beautify-console-log --save
 ```
 或
 ```
-yarn add beautify-console
+yarn add beautify-console-log
 ```
 
 #### 使用说明
