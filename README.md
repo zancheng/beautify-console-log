@@ -23,7 +23,7 @@ Software Architecture Description
 
 ```
 
-npm i beauty-console-log -- save
+npm i beautify-console-log -- save
 
 ```
 
@@ -31,7 +31,7 @@ or
 
 ```
 
-yarn add beauty-console-log
+yarn add beautify-console-log
 
 ```
 
@@ -61,7 +61,7 @@ Log.info(1234, '4', [3, 5]);
 
 ```
 
-const log = BeautifyConsole. getInstance();
+const log = BeautifyConsole.getInstance();
 
 Log.info(1234, '4', [3, 5]);
 
@@ -77,7 +77,7 @@ Log.error(1234, '4', [3, 5]);
 
 ```
 
-const log = BeautifyConsole. getInstance();
+const log = BeautifyConsole.getInstance();
 
 Log.setPadStartText('log ','hello world').info(1234,'4 ', [3, 5]);
 
