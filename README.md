@@ -1,4 +1,4 @@
-#Beautify console
+#beautify-console-log
 
 
 

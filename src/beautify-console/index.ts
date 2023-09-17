@@ -35,8 +35,6 @@ export class BeautifyConsole {
         return this.instance
     }
 
-    constructor () {}
-
     /**
      * 设置显示/隐藏console日志
      * @param showLog type { boolean }
@@ -48,10 +46,10 @@ export class BeautifyConsole {
             this.warn = console.warn.bind(this, ...this.warnPadStartText)
             this.log = console.log.bind(this, ...this.logPadStartText)
         } else {
-            this.info = (...parasm: any) => {}
-            this.error = (...parasm: any) => {}
-            this.warn = (...parasm: any) => {}
-            this.log = (...parasm: any) => {}
+            this.info = (...parasm: any) => undefined
+            this.error = (...parasm: any) => undefined
+            this.warn = (...parasm: any) => undefined
+            this.log = (...parasm: any) => undefined
         }
     }
 

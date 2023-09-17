@@ -25,7 +25,6 @@ export declare class BeautifyConsole {
     log: (...args: any[]) => void;
     private static instance;
     static getInstance(): BeautifyConsole;
-    constructor();
     /**
      * 设置显示/隐藏console日志
      * @param showLog type { boolean }
