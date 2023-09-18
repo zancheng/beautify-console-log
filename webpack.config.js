@@ -4,7 +4,7 @@ const webpack = require('webpack')
 console.log(process.env.NODE_ENV)
 module.exports = {
     mode: 'production',
-    devtool: process.env.NODE_ENV === 'development' ? "source-map" : 'cheap-module-source-map',
+    devtool: 'cheap-module-source-map',
     // 指定入口文件
     entry:'./src/index.ts',
     // 指定打包文件所在的目录

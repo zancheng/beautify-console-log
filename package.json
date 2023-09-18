@@ -1,8 +1,23 @@
 {
   "name": "beautify-console-log",
-  "version": "1.0.4",
+  "version": "1.0.8",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.",
-  "keywords": [ "typescript", "js", "log", "console", "beautify", "控制台日志美化", "console.log美化" ],
+  "keywords": [
+    "typescript",
+    "js",
+    "log",
+    "console",
+    "beautify",
+    "log",
+    "node.js",
+    "node.js console",
+    "node console",
+    "node logger",
+    "node logs",
+    "node log",
+    "控制台日志美化",
+    "console.log美化"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -21,9 +36,9 @@
   },
   "author": "chengzan",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.4",
+    "@types/node": "^20.6.2",
     "cross-env": "^7.0.3",
     "jest": "^29.6.4",
     "jest-environment-jsdom": "^29.6.4",

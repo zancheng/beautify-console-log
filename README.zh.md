@@ -2,7 +2,7 @@
 
 #### 介绍
 这是“console”对象的进一步美化和封装，包括console.log、console.info、console.warn、console.error。
-可以加入自定义的console打印前缀、对内容进行美化（规则参考 https://developer.mozilla.org/en-US/docs/Web/API/Console ），可随时关闭console打印
+可以加入自定义的console打印前缀、对内容进行美化（web端规则参考 https://developer.mozilla.org/en-US/docs/Web/API/Console ，node环境参考 https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97），可随时关闭console打印，支持node环境
 
 #### 软件架构
 软件架构说明

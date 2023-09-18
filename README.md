@@ -1,4 +1,4 @@
-#beautify-console-log
+# beautify-console-log
 
 
 
@@ -6,7 +6,7 @@
 
 This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.
 
-You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ）, can close console printing at any time
+You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ,  node environment reference https://en.wikipedia.org/wiki/ANSI_escape_code#Colors）, can close console printing at any time, supporting node.js environments
 
 
 
@@ -23,7 +23,7 @@ Software Architecture Description
 
 ```
 
-npm i beautify-console-log -- save
+npm i beautify-console-log --save
 
 ```
 
