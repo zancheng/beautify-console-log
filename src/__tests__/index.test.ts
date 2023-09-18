@@ -32,8 +32,8 @@ test('SDK getHostInfo', () => {
   log.error(1234)
   expect(log.error(1234)).toBe(undefined);
 
-  log.error(1234)
-  expect(log.error(1234)).toBe(undefined);
+  log.warn(1234)
+  expect(log.warn(1234)).toBe(undefined);
 
   log.setPadStartText('log', 'hello world').log(1234)
   expect(log.setPadStartText('log', 'hello world').log(1234)).toBe(undefined);
