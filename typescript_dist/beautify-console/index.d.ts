@@ -1,3 +1,4 @@
+type logType = 'info' | 'error' | 'warn' | 'log';
 /**
  * BeautifyConsole 是console日志工具
  *
@@ -27,26 +28,32 @@ export declare class BeautifyConsole {
     static getInstance(): BeautifyConsole;
     /**
      * 设置显示/隐藏console日志
-     * @param showLog type { boolean }
+     * @param showLog 是否打印日志 type { boolean }
+     * @param type 需要设置的日志类型日志 type { logType }
      */
     private setShowLog;
     /**
      * 打开console日志
      *
-     * @returns BeautifyConsole
-     */
-    openLog(): BeautifyConsole;
-    /**
-     * 关闭console日志
+     * @param type 需要设置的日志类型日志 type { logType }
      *
      * @returns BeautifyConsole
      */
-    closeLog(): BeautifyConsole;
+    open(type?: logType): BeautifyConsole;
+    /**
+     * 关闭console日志
+     *
+     * @param type 需要设置的日志类型日志 type { logType }
+     *
+     * @returns BeautifyConsole
+     */
+    close(type?: logType): BeautifyConsole;
     /**
      * 置开始的填充文本console日志
      * @param type type { consoleType }
      * @param text type { any }
      * @returns BeautifyConsole
      */
-    setPadStartText(type: 'info' | 'error' | 'warn' | 'log', ...text: any): BeautifyConsole;
+    setPadStartText(type: logType, ...text: any): BeautifyConsole;
 }
+export {};
