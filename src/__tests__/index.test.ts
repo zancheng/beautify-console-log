@@ -23,11 +23,11 @@ test('SDK getHostInfo', () => {
   log.log(1234)
   expect(log.log(1234)).toBe(undefined);
 
-  log.closeLog().warn(1234)
-  expect(log.closeLog().warn(1234)).toBe(undefined);
+  log.close().warn(1234)
+  expect(log.close().warn(1234)).toBe(undefined);
 
-  log.openLog().log(1234)
-  expect(log.openLog().log(1234)).toBe(undefined);
+  log.open().log(1234)
+  expect(log.open().log(1234)).toBe(undefined);
 
   log.error(1234)
   expect(log.error(1234)).toBe(undefined);

@@ -6,7 +6,7 @@
     <title>Example</title>
 </head>
 <body>
-    <script src="./beautify-console/index.js"></script>
+    <script src="./../dist/beautify-console/index.js"></script>
     <script>
         const log = BeautifyConsole.getInstance()
 
@@ -14,9 +14,9 @@
 
         log.log(1234)
 
-        log.closeLog().warn('no show')
+        log.close().warn('no show')
 
-        log.openLog().log('show log')
+        log.open().log('show log')
 
         log.error(1234)
 
