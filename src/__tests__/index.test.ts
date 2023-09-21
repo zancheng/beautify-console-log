@@ -1,6 +1,6 @@
 const path = require('path');
 
-import { BeautifyConsole } from '../beautify-console';
+import BeautifyConsole from '../index';
 
 // test('comp', () => {
 //   const id = simulate.load(path.join(__dirname, './comp/index')) // 加载自定义组件，返回组件 id

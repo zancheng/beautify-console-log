@@ -1,1 +1,2 @@
-export { BeautifyConsole } from './beautify-console';
+import { BeautifyConsole } from './beautify-console';
+export default BeautifyConsole;

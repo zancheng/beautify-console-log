@@ -23,6 +23,7 @@ yarn add beautify-console-log
 
 1.  简单使用
 ```
+import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 // 使用方式与正常的console.info()一致
 log.info(1234, '4', [3, 5]);
