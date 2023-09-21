@@ -45,6 +45,7 @@ yarn add beautify-console-log
 1. Simple use
 
 ```
+import BeautifyConsole from "beautify-console-log";
 
 const log = BeautifyConsole.getInstance();
 

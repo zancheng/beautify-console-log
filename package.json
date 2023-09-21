@@ -1,6 +1,6 @@
 {
   "name": "beautify-console-log",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error.",
   "keywords": [
     "typescript",
@@ -18,8 +18,9 @@
     "控制台日志美化",
     "console.log美化"
   ],
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "types": "lib/index.d.ts",
+  "unpkg": "dist/index.js",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "tscbuild": "tsc",
