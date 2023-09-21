@@ -47,7 +47,7 @@ const baseColor = (option: BaseColorType = {}):string => {
  */
 const padText: Record<string, any> = {
     info() {
-        if (typeof process === 'object') {
+        if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'blue'
             }), 'beautify-console-log info: -> ']
@@ -56,7 +56,7 @@ const padText: Record<string, any> = {
         }
     },
     error() {
-        if (typeof process === 'object') {
+        if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'red'
             }), 'beautify-console-log error: -> ']
@@ -65,7 +65,7 @@ const padText: Record<string, any> = {
         }
     },
     warn() {
-        if (typeof process === 'object') {
+        if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'yellow'
             }), 'beautify-console-log warn: -> ']
@@ -74,7 +74,7 @@ const padText: Record<string, any> = {
         }
     },
     log() {
-        if (typeof process === 'object') {
+        if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'green'
             }), 'beautify-console-log log: -> ']
