@@ -3,7 +3,7 @@
       "target": "ES2016",
       "module": "commonjs",
       "declaration": true,
-      "outDir": "./typescript_dist",
+      "outDir": "./lib",
       "strict": true,
       "allowSyntheticDefaultImports": true
     },
