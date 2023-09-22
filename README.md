@@ -9,17 +9,12 @@ This is a further beautification and encapsulation of the 'console' object, incl
 You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ,  node environment reference https://en.wikipedia.org/wiki/ANSI_escape_code#Colors）, can close console printing at any time, supporting node.js environments.
 Please view the effect on the console.
 
-
-
-#### Software Architecture
-
-Software Architecture Description
-
-
+### Effect demonstration
+![node.js 控制台](https://img-blog.csdnimg.cn/7b0204dc2f7b4b78aab9e6ea43de256c.jpeg#pic_center)
+![web端 控制台](https://img-blog.csdnimg.cn/35ebf4b72e574e4e9ecf0a9a6b148809.jpeg#pic_center)
 
 
 #### Installation Tutorial
-
 
 
 ```
@@ -64,7 +59,26 @@ const log = new BeautifyConsole();
 Log.info(1234, '4', [3, 5]);
 
 ```
+Or directly use the `dist/index. js` file
+```
+<script src="./dist/index.js">
+```
 
+```
+const log = BeautifyConsole.default.getInstance()
+
+log.info(1234, '4', [3, 5])
+
+log.log(1234)
+
+log.close().warn('no show')
+
+log.open().log('show log')
+
+log.error(1234)
+
+log.setPadStartText('log', 'hello world').log(1234)
+```
 
 2. Supported console types
 

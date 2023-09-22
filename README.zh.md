@@ -5,9 +5,9 @@
 可以加入自定义的console打印前缀、对内容进行美化（web端规则参考 https://developer.mozilla.org/en-US/docs/Web/API/Console ，node环境参考 https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97），可随时关闭console打印，支持node环境。
 查看效果请在控制台。
 
-#### 软件架构
-软件架构说明
-
+### 效果
+![node.js 控制台](https://img-blog.csdnimg.cn/7b0204dc2f7b4b78aab9e6ea43de256c.jpeg#pic_center)
+![web端 控制台](https://img-blog.csdnimg.cn/35ebf4b72e574e4e9ecf0a9a6b148809.jpeg#pic_center)
 
 #### 安装教程
 
@@ -37,6 +37,27 @@ const log = new BeautifyConsole();
 log.info(1234, '4', [3, 5]);
 
 ```
+或直接使用 `dist/index.js` 文件
+```
+<script src="./dist/index.js">
+```
+
+```
+const log = BeautifyConsole.default.getInstance()
+
+log.info(1234, '4', [3, 5])
+
+log.log(1234)
+
+log.close().warn('no show')
+
+log.open().log('show log')
+
+log.error(1234)
+
+log.setPadStartText('log', 'hello world').log(1234)
+```
+
 
 
 2.  支持的console类型
