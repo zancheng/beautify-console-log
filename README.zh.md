@@ -6,8 +6,8 @@
 查看效果请在控制台。
 
 ### 效果
-![node.js 控制台](./20230918182028.jpg)
-![web端 控制台](./20230918182139.jpg)
+![node.js 控制台](https://img-blog.csdnimg.cn/7b0204dc2f7b4b78aab9e6ea43de256c.jpeg#pic_center)
+![web端 控制台](https://img-blog.csdnimg.cn/35ebf4b72e574e4e9ecf0a9a6b148809.jpeg#pic_center)
 
 #### 安装教程
 
@@ -37,6 +37,27 @@ const log = new BeautifyConsole();
 log.info(1234, '4', [3, 5]);
 
 ```
+或直接使用 `dist/index.js` 文件
+```
+<script src="./dist/index.js">
+```
+
+```
+const log = BeautifyConsole.default.getInstance()
+
+log.info(1234, '4', [3, 5])
+
+log.log(1234)
+
+log.close().warn('no show')
+
+log.open().log('show log')
+
+log.error(1234)
+
+log.setPadStartText('log', 'hello world').log(1234)
+```
+
 
 
 2.  支持的console类型

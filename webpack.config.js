@@ -14,7 +14,8 @@ module.exports = {
         path:path.resolve(__dirname,'dist'),
         // 打包后的文件
         filename:'index.js',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        library: 'BeautifyConsole',
     },
     devServer: {},
     optimization: {
