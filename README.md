@@ -9,17 +9,12 @@ This is a further beautification and encapsulation of the 'console' object, incl
 You can add custom console printing prefixes and beautify the content (rule reference https://developer.mozilla.org/en-US/docs/Web/API/Console ,  node environment reference https://en.wikipedia.org/wiki/ANSI_escape_code#Colors）, can close console printing at any time, supporting node.js environments.
 Please view the effect on the console.
 
-
-
-#### Software Architecture
-
-Software Architecture Description
-
-
+### Effect demonstration
+![node.js 控制台](./20230918182028.jpg)
+![web端 控制台](./20230918182139.jpg)
 
 
 #### Installation Tutorial
-
 
 
 ```

@@ -5,9 +5,9 @@
 可以加入自定义的console打印前缀、对内容进行美化（web端规则参考 https://developer.mozilla.org/en-US/docs/Web/API/Console ，node环境参考 https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97），可随时关闭console打印，支持node环境。
 查看效果请在控制台。
 
-#### 软件架构
-软件架构说明
-
+### 效果
+![node.js 控制台](./20230918182028.jpg)
+![web端 控制台](./20230918182139.jpg)
 
 #### 安装教程
 
