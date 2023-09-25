@@ -32,6 +32,11 @@ interface BaseColorType {
 
 type logType = 'info' | 'error' | 'warn' | 'log'
 
+interface PadStartStyle {
+    color: string
+    text: string
+}
+
 /**
  * 转换node使用的日志颜色
  */
@@ -46,40 +51,40 @@ const baseColor = (option: BaseColorType = {}):string => {
  * 日志左侧填充的文字
  */
 const padText: Record<string, any> = {
-    info() {
+    info(text: string = "beautify-console-log info: -> ") {
         if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'blue'
-            }), 'beautify-console-log info: -> ']
+            }), text]
         } else {
-            return ['%cbeautify-console-log info: -> ', 'color: #5D8EF0;']
+            return [`%c${text} `, 'color: #5D8EF0;']
         }
     },
-    error() {
+    error(text: string = "beautify-console-log error: -> ") {
         if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'red'
             }), 'beautify-console-log error: -> ']
         } else {
-            return ['beautify-console-log error: -> ']
+            return [text]
         }
     },
-    warn() {
+    warn(text: string = "beautify-console-log warn: -> ") {
         if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'yellow'
-            }), 'beautify-console-log warn: -> ']
+            }), text]
         } else {
-            return ['beautify-console-log warn: -> ']
+            return [text]
         }
     },
-    log() {
+    log(text: string = "beautify-console-log log: -> ") {
         if (typeof process === 'object' && process.title === 'node') {
             return [baseColor({
                 color: 'green'
-            }), 'beautify-console-log log: -> ']
+            }), text]
         } else {
-            return ['%cbeautify-console-log log: -> ', 'color: green;']
+            return [`%c${text} `, 'color: green;']
         }
     }
 }
@@ -193,24 +198,24 @@ export class BeautifyConsole {
     }
 
     /**
-     * 置开始的填充文本console日志
+     * 重置开始的填充文本console日志，默认如info类型的开始填充： `cbeautify-console-log info: -> `
      * @param type type { consoleType }
      * @param text type { any }
      * @returns BeautifyConsole
      */
-    public setPadStartText(type: logType, ...text: any):BeautifyConsole {
+    public setPadStartText(type: logType, text: string):BeautifyConsole {
         const setTextFunction = {
             info: () => {
-                this.info = console.info.bind(this, ...text)
+                this.info = console.info.bind(this, ...padText[infoKey](text))
             },
             error: () => {
-                this.error = console.error.bind(this, ...text)
+                this.error = console.error.bind(this, ...padText[errorKey](text))
             },
             warn: () => {
-                this.warn = console.warn.bind(this, ...text)
+                this.warn = console.warn.bind(this, ...padText[warnKey](text))
             },
             log: () => {
-                this.log = console.log.bind(this, ...text)
+                this.log = console.log.bind(this, ...padText[logKey](text))
             },
         }
         if (setTextFunction[type]) {
@@ -220,4 +225,38 @@ export class BeautifyConsole {
         }
         return this
     }
+
+    /**
+     * 设置自定义填充美化
+     * @param type 日志类型 type {logType}
+     * @param style 自定义美化 type {PadStartStyle}
+     */
+    // public setPadStartStyle(type: logType, style: PadStartStyle) {
+    //     const setStyleFunction = {
+    //         info: () => {
+    //             this.infoPadStartText[1] = style.text
+    //             this.info = console.info.bind(this, ...this.infoPadStartText)
+    //         },
+    //         error: () => {
+    //             this.errorPadStartText[1] = style.text
+    //             this.error = console.error.bind(this, ...this.errorPadStartText)
+    //         },
+    //         warn: () => {
+    //             this.warnPadStartText[1] = style.text
+    //             this.warn = console.warn.bind(this, ...this.warnPadStartText)
+    //         },
+    //         log: () => {
+    //             this.logPadStartText[1] = style.text
+    //             this.log = console.log.bind(this, ...this.logPadStartText)
+    //         },
+    //     }
+    //     if (setStyleFunction[type]) {
+    //         setStyleFunction[type]()
+    //     } else {
+    //         console.error(`type:${type} not supported`)
+    //     }
+    //     return this
+    // }
 }
+
+

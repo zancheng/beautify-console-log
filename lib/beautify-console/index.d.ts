@@ -49,11 +49,11 @@ export declare class BeautifyConsole {
      */
     close(type?: logType): BeautifyConsole;
     /**
-     * 置开始的填充文本console日志
+     * 重置开始的填充文本console日志，默认如info类型的开始填充： `cbeautify-console-log info: -> `
      * @param type type { consoleType }
      * @param text type { any }
      * @returns BeautifyConsole
      */
-    setPadStartText(type: logType, ...text: any): BeautifyConsole;
+    setPadStartText(type: logType, text: string): BeautifyConsole;
 }
 export {};
