@@ -7,14 +7,14 @@
  * 8 不可见
  */
 const COLOR_CODE:Record<string, number> = {
-  black: 30,
-  red: 31,
-  green: 32,
-  yellow: 33,
-  blue: 34,
-  purple: 35,
-  cyan: 36,
-  white: 37,
+  black: 90,
+  red: 91,
+  green: 92,
+  yellow: 93,
+  blue: 94,
+  purple: 95,
+  cyan: 96,
+  white: 97,
   // black_bg: 40,
   // red_bg: 41,
   // green_bg: 42,
@@ -39,12 +39,19 @@ interface PadStartStyle {
 
 /**
  * 转换node使用的日志颜色
+ * @param option 颜色类型配置
+ * @param text 日志起始填充文本内容
+ * @param type 日志类型
+ * @returns string
  */
-const baseColor = (option: BaseColorType = {}):string => {
-  const { color = 'white', colorBg = '' } = option;
-  const colorBgCode = COLOR_CODE[colorBg] ? COLOR_CODE[colorBg] + 10 : 0
+const baseColor = (option: BaseColorType = {}, text: string, type: logType):string => {
+  const { color = 'white'} = option;
   const colorCode = COLOR_CODE[color] || 0
-  return `${'\x1b'}[${colorBgCode};${colorCode}m`;
+  if (typeof process === 'object' && process.title === 'node') {
+    return `\x1b[${colorCode + 10};97;1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
+  } else {
+    return `\x1b[${colorCode + 10};97;1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
+  }
 }
 
 /**
@@ -52,40 +59,24 @@ const baseColor = (option: BaseColorType = {}):string => {
  */
 const padText: Record<string, any> = {
     info(text: string = "beautify-console-log info: -> ") {
-        if (typeof process === 'object' && process.title === 'node') {
-            return [baseColor({
-                color: 'blue'
-            }), text]
-        } else {
-            return [`%c${text} `, 'color: #5D8EF0;']
-        }
+        return [baseColor({
+            color: 'blue',
+        }, text, 'info')]
     },
     error(text: string = "beautify-console-log error: -> ") {
-        if (typeof process === 'object' && process.title === 'node') {
-            return [baseColor({
-                color: 'red'
-            }), 'beautify-console-log error: -> ']
-        } else {
-            return [text]
-        }
+        return [baseColor({
+            color: 'red'
+        }, text, 'error')]
     },
     warn(text: string = "beautify-console-log warn: -> ") {
-        if (typeof process === 'object' && process.title === 'node') {
-            return [baseColor({
-                color: 'yellow'
-            }), text]
-        } else {
-            return [text]
-        }
+        return [baseColor({
+            color: 'yellow'
+        }, text, 'warn')]
     },
     log(text: string = "beautify-console-log log: -> ") {
-        if (typeof process === 'object' && process.title === 'node') {
-            return [baseColor({
-                color: 'green'
-            }), text]
-        } else {
-            return [`%c${text} `, 'color: green;']
-        }
+        return [baseColor({
+            color: 'green'
+        }, text, 'log')]
     }
 }
 

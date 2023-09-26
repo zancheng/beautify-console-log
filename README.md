@@ -10,6 +10,12 @@ You can add custom console printing prefixes and beautify the content (rule refe
 Please view the effect on the console.
 
 ### Effect demonstration
+
+#### version \>= V1.2.1 Added background color
+![node.js 控制台](https://img-blog.csdnimg.cn/ed9d46a43c7448a5b76fd8f5a26a2598.jpeg#pic_center)
+![web端 控制台](https://img-blog.csdnimg.cn/685730502dd643edb4b7ad82fb1c5647.jpeg#pic_center)
+
+#### version < V1.2.1
 ![node.js 控制台](https://img-blog.csdnimg.cn/aa33e1eb915842abb8e7cc2df0da85ca.jpeg#pic_center)
 ![web端 控制台](https://img-blog.csdnimg.cn/e6fd73b06baf4d9390f3db92da23eb91.jpeg#pic_center)
 
