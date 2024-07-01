@@ -27,14 +27,20 @@ const COLOR_CODE:Record<string, number> = {
 
 interface BaseColorType {
     color?: string
-    colorBg?: string
+    bgColor?: string
 }
 
 type logType = 'info' | 'error' | 'warn' | 'log'
 
 interface PadStartStyle {
     color: string
-    text: string
+    bgColor: string
+}
+
+interface PadStartText {
+    title: string
+    logType: logType
+    style?: PadStartStyle
 }
 
 /**
@@ -45,12 +51,13 @@ interface PadStartStyle {
  * @returns string
  */
 const baseColor = (option: BaseColorType = {}, text: string, type: logType):string => {
-  const { color = 'white'} = option;
-  const colorCode = COLOR_CODE[color] || 0
+  const { color = 'white', bgColor = 'white'} = option;
+  const backgroundColor = COLOR_CODE[bgColor] || 0
+  const textColor = COLOR_CODE[color] || 0
   if (typeof process === 'object' && process.title === 'node') {
-    return `\x1b[${colorCode + 10};97;1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
+    return `\x1b[${backgroundColor + 10};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
   } else {
-    return `\x1b[${colorCode + 10};97;1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
+    return `\x1b[${backgroundColor + 10};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
   }
 }
 
@@ -58,25 +65,17 @@ const baseColor = (option: BaseColorType = {}, text: string, type: logType):stri
  * 日志左侧填充的文字
  */
 const padText: Record<string, any> = {
-    info(text: string = "beautify-console-log info: -> ") {
-        return [baseColor({
-            color: 'blue',
-        }, text, 'info')]
+    info(text: string = "beautify-console-log info: -> ", style: BaseColorType = {bgColor: 'blue', color: 'white'}) {
+        return [baseColor(style, text, 'info')]
     },
-    error(text: string = "beautify-console-log error: -> ") {
-        return [baseColor({
-            color: 'red'
-        }, text, 'error')]
+    error(text: string = "beautify-console-log error: -> ", style: BaseColorType = {bgColor: 'red', color: 'white'}) {
+        return [baseColor(style, text, 'error')]
     },
-    warn(text: string = "beautify-console-log warn: -> ") {
-        return [baseColor({
-            color: 'yellow'
-        }, text, 'warn')]
+    warn(text: string = "beautify-console-log warn: -> ", style: BaseColorType = {bgColor: 'yellow', color: 'black'}) {
+        return [baseColor(style, text, 'warn')]
     },
-    log(text: string = "beautify-console-log log: -> ") {
-        return [baseColor({
-            color: 'green'
-        }, text, 'log')]
+    log(text: string = "beautify-console-log log: -> ", style: BaseColorType = {bgColor: 'green', color: 'white'}) {
+        return [baseColor(style, text, 'log')]
     }
 }
 
@@ -90,11 +89,16 @@ const logKey = 'log'
  * 
  * 目前只有常用的 info、log、error、warn类型
  * 
- * 1.使用：Log.getInstance().log(1, [2, 3], '4')
+ * 1.使用：
+ * ```
+ * import BeautifyConsole from "beautify-console-log";
+ * const log = BeautifyConsole.getInstance();
+ * log.log(1, [2, 3], '4');
+ * ```
  * 
- * 2.设置打开console日志显示：Log.openLog()
+ * 2.设置打开console日志显示：Log.open()
  * 
- * 3.设置关闭console日志显示：Log.closeLog()
+ * 3.设置关闭console日志显示：Log.close()
  * 
  * 4.设置开始的填充文本console日志：Log.setPadStartText()
  * 
@@ -121,13 +125,32 @@ export class BeautifyConsole {
         }
         return this.instance
     }
+    /**
+     * 初始化配置项
+     */
+    public config(config: {
+        type?: logType[]
+        title?: string
+    }) {
+        const { type = [infoKey, errorKey, warnKey, logKey], title } = config
+        if (type.length > 0) {
+            this.setShowLog(false)
+            type.forEach(item => this.setShowLog(true, item))
+        }
+        if (title) {
+            type.forEach(item => this.setPadStartText({
+                logType: item,
+                title
+            }))
+        }
+    }
 
     /**
      * 设置显示/隐藏console日志
      * @param showLog 是否打印日志 type { boolean }
      * @param type 需要设置的日志类型日志 type { logType }
      */
-    private setShowLog(showLog: boolean, type: logType | undefined) {
+    private setShowLog(showLog: boolean, type?: logType) {
         const setShowLogFunction = {
             info: () => {
                 this.info = showLog ? console.info.bind(this, ...this.infoPadStartText) : (...parasm: any) => undefined
@@ -165,6 +188,18 @@ export class BeautifyConsole {
     }
 
     /**
+     * 重置console日志
+     * 
+     * @param type 需要设置的日志类型日志 type { logType }
+     * 
+     * @returns BeautifyConsole
+     */
+    public reset():BeautifyConsole {
+        this.setShowLog(true)
+        return this
+    }
+
+    /**
      * 打开console日志
      * 
      * @param type 需要设置的日志类型日志 type { logType }
@@ -194,60 +229,32 @@ export class BeautifyConsole {
      * @param text type { any }
      * @returns BeautifyConsole
      */
-    public setPadStartText(type: logType, text: string):BeautifyConsole {
-        const setTextFunction = {
-            info: () => {
-                this.info = console.info.bind(this, ...padText[infoKey](text))
-            },
-            error: () => {
-                this.error = console.error.bind(this, ...padText[errorKey](text))
-            },
-            warn: () => {
-                this.warn = console.warn.bind(this, ...padText[warnKey](text))
-            },
-            log: () => {
-                this.log = console.log.bind(this, ...padText[logKey](text))
-            },
-        }
-        if (setTextFunction[type]) {
-            setTextFunction[type]()
-        } else {
-            console.error(`type:${type} not supported`)
+    public setPadStartText(config: PadStartText):BeautifyConsole {
+        try {
+            const setTextFunction = {
+                info: () => {
+                    this.info = console.info.bind(this, ...padText[infoKey](config.title, config.style))
+                },
+                error: () => {
+                    this.error = console.error.bind(this, ...padText[errorKey](config.title, config.style))
+                },
+                warn: () => {
+                    this.warn = console.warn.bind(this, ...padText[warnKey](config.title, config.style))
+                },
+                log: () => {
+                    this.log = console.log.bind(this, ...padText[logKey](config.title, config.style))
+                },
+            }
+            if (setTextFunction[config.logType]) {
+                setTextFunction[config.logType]()
+            } else {
+                console.error(`type:${config.logType} not supported`)
+            }
+        } catch (error) {
+            this.error(error)
         }
         return this
     }
-
-    /**
-     * 设置自定义填充美化
-     * @param type 日志类型 type {logType}
-     * @param style 自定义美化 type {PadStartStyle}
-     */
-    // public setPadStartStyle(type: logType, style: PadStartStyle) {
-    //     const setStyleFunction = {
-    //         info: () => {
-    //             this.infoPadStartText[1] = style.text
-    //             this.info = console.info.bind(this, ...this.infoPadStartText)
-    //         },
-    //         error: () => {
-    //             this.errorPadStartText[1] = style.text
-    //             this.error = console.error.bind(this, ...this.errorPadStartText)
-    //         },
-    //         warn: () => {
-    //             this.warnPadStartText[1] = style.text
-    //             this.warn = console.warn.bind(this, ...this.warnPadStartText)
-    //         },
-    //         log: () => {
-    //             this.logPadStartText[1] = style.text
-    //             this.log = console.log.bind(this, ...this.logPadStartText)
-    //         },
-    //     }
-    //     if (setStyleFunction[type]) {
-    //         setStyleFunction[type]()
-    //     } else {
-    //         console.error(`type:${type} not supported`)
-    //     }
-    //     return this
-    // }
 }
 
 

@@ -1,14 +1,28 @@
 type logType = 'info' | 'error' | 'warn' | 'log';
+interface PadStartStyle {
+    color: string;
+    bgColor: string;
+}
+interface PadStartText {
+    title: string;
+    logType: logType;
+    style?: PadStartStyle;
+}
 /**
  * BeautifyConsole 是console日志工具
  *
  * 目前只有常用的 info、log、error、warn类型
  *
- * 1.使用：Log.getInstance().log(1, [2, 3], '4')
+ * 1.使用：
+ * ```
+ * import BeautifyConsole from "beautify-console-log";
+ * const log = BeautifyConsole.getInstance();
+ * log.log(1, [2, 3], '4');
+ * ```
  *
- * 2.设置打开console日志显示：Log.openLog()
+ * 2.设置打开console日志显示：Log.open()
  *
- * 3.设置关闭console日志显示：Log.closeLog()
+ * 3.设置关闭console日志显示：Log.close()
  *
  * 4.设置开始的填充文本console日志：Log.setPadStartText()
  *
@@ -27,11 +41,26 @@ export declare class BeautifyConsole {
     private static instance;
     static getInstance(): BeautifyConsole;
     /**
+     * 初始化配置项
+     */
+    config(config: {
+        type?: logType[];
+        title?: string;
+    }): void;
+    /**
      * 设置显示/隐藏console日志
      * @param showLog 是否打印日志 type { boolean }
      * @param type 需要设置的日志类型日志 type { logType }
      */
     private setShowLog;
+    /**
+     * 重置console日志
+     *
+     * @param type 需要设置的日志类型日志 type { logType }
+     *
+     * @returns BeautifyConsole
+     */
+    reset(): BeautifyConsole;
     /**
      * 打开console日志
      *
@@ -54,6 +83,6 @@ export declare class BeautifyConsole {
      * @param text type { any }
      * @returns BeautifyConsole
      */
-    setPadStartText(type: logType, text: string): BeautifyConsole;
+    setPadStartText(config: PadStartText): BeautifyConsole;
 }
 export {};

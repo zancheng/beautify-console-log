@@ -22,7 +22,43 @@
 
         log.error(1234)
 
-        log.setPadStartText('log', 'hello world:').log(1234)
+
+        console.log('------------------------------------------------')
+        console.log('--------Set log header text and style-----------')
+
+        log.setPadStartText({
+            title: 'hello world:',
+            logType: 'log',
+            style: {
+                color: 'red',
+                bgColor: 'green'
+            }
+        }).log(1234)
+        log.log(1)
+        log.info(1)
+
+        console.log('------------------------------------------------')
+        console.log('----------------config start--------------------')
+
+
+        log.config({
+            title: 'custom title',
+            logType: ['info', 'error']
+        })
+
+        log.warn('custom warn', 'no show')
+
+        log.info('custom log')
+
+        log.error('custom error')
+
+        console.log('------------------------------------------------')
+        console.log('----------------config reset--------------------')
+
+        log.reset()
+        log.open()
+        log.info('reset log')
+        log.warn('reset warn')
     </script>
 </body>
 </html>

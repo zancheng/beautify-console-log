@@ -1,5 +1,3 @@
-const path = require('path');
-
 import BeautifyConsole from '../index';
 
 test('SDK getHostInfo', () => {
@@ -10,6 +8,12 @@ test('SDK getHostInfo', () => {
   expect(log.open().log(1234)).toBe(undefined);
   expect(log.error(1234)).toBe(undefined);
   expect(log.warn(1234)).toBe(undefined);
-  expect(log.setPadStartText('log', 'hello world ->').log(1234)).toBe(undefined);
-  expect(log.setPadStartText('info', 'hello world ->').info('info')).toBe(undefined);
+  expect(log.setPadStartText({
+    title: 'hello world ->',
+    logType: 'info'
+  }).log(1234)).toBe(undefined);
+  expect(log.setPadStartText({
+    title: 'hello world ->',
+    logType: 'info'
+  }).info('info')).toBe(undefined);
 });
