@@ -17,7 +17,6 @@ Due to most log beautification plugins not being able to locate the **code line*
 - [Contribution](#Contribution)
 
 ## Effect
-version \>= V1.2.1 Added background color
 <p>
 <img src="./img/3.jpg" style="width: 500px">
 </p>

@@ -65,16 +65,16 @@ const baseColor = (option: BaseColorType = {}, text: string, type: logType):stri
  * 日志左侧填充的文字
  */
 const padText: Record<string, any> = {
-    info(text: string = "beautify-console-log info: -> ", style: BaseColorType = {bgColor: 'blue', color: 'white'}) {
+    info(text: string = "beautify-console-log ", style: BaseColorType = {bgColor: 'blue', color: 'white'}) {
         return [baseColor(style, text, 'info')]
     },
-    error(text: string = "beautify-console-log error: -> ", style: BaseColorType = {bgColor: 'red', color: 'white'}) {
+    error(text: string = "beautify-console-log ", style: BaseColorType = {bgColor: 'red', color: 'white'}) {
         return [baseColor(style, text, 'error')]
     },
-    warn(text: string = "beautify-console-log warn: -> ", style: BaseColorType = {bgColor: 'yellow', color: 'black'}) {
+    warn(text: string = "beautify-console-log ", style: BaseColorType = {bgColor: 'yellow', color: 'black'}) {
         return [baseColor(style, text, 'warn')]
     },
-    log(text: string = "beautify-console-log log: -> ", style: BaseColorType = {bgColor: 'green', color: 'white'}) {
+    log(text: string = "beautify-console-log ", style: BaseColorType = {bgColor: 'green', color: 'white'}) {
         return [baseColor(style, text, 'log')]
     }
 }

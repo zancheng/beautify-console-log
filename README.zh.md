@@ -17,7 +17,6 @@
 
 ## 效果
 
-### version \>= V1.2.1 加入了背景色
 <p>
 <img src="./img/3.jpg" style="width: 500px">
 </p>
