@@ -88,7 +88,7 @@ log.info({
 > The usage method is consistent with the normal console.warn
 ```
 import BeautifyConsole from "beautify-console-log";
-const log = BeautifyConsole.getInstance();=
+const log = BeautifyConsole.getInstance();
 log.warn(1234, '4', [3, 5]);
 log.warn('warn');
 ```
@@ -111,9 +111,9 @@ After using `log.close()` to close the log, you can use `log.open()` to open the
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.open() // Open all types of logs
-// 或者
+// OR
 log.open('info') // Open the info log
-// 或者
+// OR
 log.open('info').open('error') // Open the info log
 ```
 
@@ -126,9 +126,9 @@ Closing logs allows you to close all logs or a certain type of log.
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.close() // Close all types of logs
-// 或者
+// OR
 log.close('info') // Close the info log
-// 或者
+// OR
 log.close('info').open('log')
 ```
 
@@ -145,9 +145,9 @@ Set the text content and style of the log header
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.close() // Close all types of logs
-// 或者
+// OR
 log.close('info') // Close the info log
-// 或者
+// OR
 log.close('info').open('log')
 ```
 

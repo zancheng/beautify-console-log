@@ -81,7 +81,7 @@ log.info({
 > 使用方式与正常的console.warn()一致
 ```
 import BeautifyConsole from "beautify-console-log";
-const log = BeautifyConsole.getInstance();=
+const log = BeautifyConsole.getInstance();
 log.warn(1234, '4', [3, 5]);
 log.warn('warn');
 ```
