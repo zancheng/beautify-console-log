@@ -1,6 +1,6 @@
 {
   "name": "beautify-console-log",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error. It can display the number of rows where the log is printed.",
   "keywords": [
     "typescript",
@@ -24,7 +24,7 @@
     "console美化",
     "console调试"
   ],
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "types": "lib/index.d.ts",
   "unpkg": "dist/index.js",
   "scripts": {
