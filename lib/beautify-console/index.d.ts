@@ -6,6 +6,7 @@ import { LogType, PadStartText } from "./model";
  *
  * 1.使用：
  * ```
+ *
  * import BeautifyConsole from "beautify-console-log";
  * const log = BeautifyConsole.getInstance();
  * log.log(1, [2, 3], '4');
@@ -17,6 +18,24 @@ import { LogType, PadStartText } from "./model";
  *
  * 4.设置开始的填充文本console日志：Log.setPadStartText()
  *
+ *
+ * ```
+ *  {
+ *    info: (...args: any[]) => void;
+ *    error: (...args: any[]) => void;
+ *    warn: (...args: any[]) => void;
+ *    log: (...args: any[]) => void;
+ *    static getInstance(): BeautifyConsole;
+ *    config(config: {
+ *        type?: LogType[];
+ *        title?: string;
+ *    }): void;
+ *    reset(): BeautifyConsole;
+ *    open(type?: LogType): BeautifyConsole;
+ *    close(type?: LogType): BeautifyConsole;
+ *    setPadStartText(config: PadStartText): BeautifyConsole;
+ *  }
+ *  ```
  *
  * 可参考 https://developer.mozilla.org/en-US/docs/Web/API/Console
  */

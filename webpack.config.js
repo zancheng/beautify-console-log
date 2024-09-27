@@ -11,7 +11,7 @@ module.exports = {
     // 指定打包文件所在的目录
     output:{
         // 利用path可完整拼出打包文件的目录
-        path:path.resolve(__dirname,'dist'),
+        path:path.resolve(__dirname, 'dist'),
         // 打包后的文件
         filename:'index.js',
         libraryTarget: 'umd',

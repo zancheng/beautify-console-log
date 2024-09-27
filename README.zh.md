@@ -44,13 +44,14 @@ yarn add beautify-console-log
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
 |title                          |String                       |自定义日志头                   |
-|type                        |Array<String>               |显示的日志类型，设置后只显示对应的日志类型(`"info"`、`"log"`、`"warn"`、`"error"`)|
+|type                        |LogType[]              |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`)|
 ```
 import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'custom title',
-    type: ['info', 'error']
+    type: [LogType.info, LogType.error]
 })
 // 使用方式与正常的console.info()一致
 log.info(1234, '4', [3, 5]);
@@ -99,60 +100,69 @@ log.error('warn');
 使用`log.close()`关闭日志后，可以`log.open()`进行打开对应的日志类型，打开所有类型日志时，不传参（支持链式调用）。
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
-|String?                       |`info`、`log`、`warn`、`error`，或者不传|
+|LogType?                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
 ```
 import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 log.open() // 打开所有类型日志
 // 或者
-log.open('info') // 打开info日志
+log.open(LogType.info) // 打开info日志
 // 或者
-log.open('info').open('error') // 打开info日志
+log.open(LogType.info).open('error') // 打开info日志
 ```
 
 ### close
 关闭日志，可以关闭全部日志或者某个类型的日志。
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
-|String?                       |`info`、`log`、`warn`、`error`，或者不传|
+|LogType?                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
 ```
 import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 log.close() // 关闭所有类型日志
 // 或者
-log.close('info') // 关闭info日志
+log.close(LogType.info) // 关闭info日志
 // 或者
-log.close('info').open('log')
+log.close(LogType.info).open('log')
 ```
 
 ### setPadStartText
 设置日志头文本内容及文本样式
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
+||PadStartText||
 |title                          |String                       |自定义日志头                   |
-|logType                        |String              |`info`,`log`,`warn`,`error`|
-|style                        |Object              |`info`,`log`,`warn`,`error`|
-|                        |├──color              |`black`,`red`,`green`,`yellow`,`blue`,`purple`,`cyan`,`white`|
-|                        |└──bgColor              |`black`,`red`,`green`,`yellow`,`blue`,`purple`,`cyan`,`white`|
+|logType                        |String              |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`|
+|style                        |Object              ||
+|                        |├──color              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|
+|                        |└──bgColor              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|
 ```
 import BeautifyConsole from "beautify-console-log";
+import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 log.close() // 关闭所有类型日志
 // 或者
-log.close('info') // 关闭info日志
+log.close(LogType.info) // 关闭info日志
 // 或者
-log.close('info').open('log')
+log.close(LogType.info).open('log')
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).log(1234)
 ```
 
 ### reset
 当设置自定义日志头或关闭部分日志等操作后，可以通过`log.reset()`重置。
 ```
 import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 
 log.config({
     title: 'custom title',
-    type: ['info', 'error']
+    type: [LogType.info, LogType.error]
 })
 
 log.reset() // 打开所有类型日志
@@ -188,9 +198,7 @@ const log = BeautifyConsole.default.getInstance()
 
 log.info(1234, '4', [3, 5])
 
-log.log({
-    "name": "chengzan"
-})
+log.log(1234)
 
 log.close().warn('no show')
 
@@ -198,6 +206,10 @@ log.open().log('show log')
 
 log.error(1234)
 
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).log(1234)
 
 console.log('------------------------------------------------')
 console.log('--------Set log header text and style-----------')
@@ -234,9 +246,10 @@ log.warn('reset warn')
 2.  初始化配置
 ```
 const log = BeautifyConsole.getInstance();
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 log.config({
     title: 'example pad start text', // 左侧填充的日志头内容
-    type: ['info', 'error', 'warn', 'log'], // 显示部分日志类型
+    type: [LogType.info, LogType.error, LogType.warn, LogType.log], // 显示部分日志类型
 })
 log.info(1234, '4', [3, 5]);
 log.log(1234, '4', [3, 5]);
@@ -256,51 +269,58 @@ log.error(1234, '4', [3, 5]);
 4.  加入自定义console日志头
 ```
 const log = BeautifyConsole.getInstance();
-log.setPadStartText('log', 'hello world')
-// or
-log.setPadStartText('log', 'hello world').info(1234, '4', [3, 5]);
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).info(1234,'4 ', [3, 5])
+// 也可以这样
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).info(1234,'4 ', [3, 5]).info(1234, '4', [3, 5]);
 ```
 5.  关闭日志，传入参数就关闭对应的console日志类型，不传就关闭所有的类型，支持链式调用
 ```
+// ...省略
 const log = BeautifyConsole.getInstance();
-log.close('info');
-log.close('log');
-log.close('warn');
-log.close('error');
+log.close(LogType.info);
+log.close(LogType.log);
+log.close(LogType.warn);
+log.close(LogType.error);
 log.close();
-log.close().open('error');
+log.close().open(LogType.error);
 
 // or
-log.open('error').open('log').open('warn').open('info');
+log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
 
 // or
-log.close('error').info('closed error');
-log.close('error').error('closed error');
+log.close(LogType.error).info('closed error');
+log.close(LogType.error).error('closed error');
 
 // or
-log.close('error').open('info');
-log.close('error').open('info').info('info...');
+log.close(LogType.error).open(LogType.info);
+log.close(LogType.error).open(LogType.info).info('info...');
 ```
 6.  打开日志，传入参数就打开对应的console日志类型，不传就打开所有的类型，支持链式调用
 ```
 const log = BeautifyConsole.getInstance();
-log.open('info');
-log.open('log');
-log.open('warn');
-log.open('error');
+log.open(LogType.info);
+log.open(LogType.log);
+log.open(LogType.warn);
+log.open(LogType.error);
 log.open();
-log.open().close('info');
+log.open().close(LogType.info);
 
 //or
-log.open('error').open('log').open('warn').open('info');
+log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
 
 // or
 log.open().info('closed error');
-log.open('error').error('closed error');
+log.open(LogType.error).error('closed error');
 
 // or
-log.close('error').open('info');
-log.close('error').open('info').info('info...');
+log.close(LogType.error).open(LogType.info);
+log.close(LogType.error).open(LogType.info).info('info...');
 ```
 
 ## 参与贡献
