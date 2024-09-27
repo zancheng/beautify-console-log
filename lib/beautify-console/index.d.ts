@@ -1,13 +1,4 @@
-type logType = 'info' | 'error' | 'warn' | 'log';
-interface PadStartStyle {
-    color: string;
-    bgColor: string;
-}
-interface PadStartText {
-    title: string;
-    logType: logType;
-    style?: PadStartStyle;
-}
+import { LogType, PadStartText } from "./model";
 /**
  * BeautifyConsole 是console日志工具
  *
@@ -44,19 +35,19 @@ export declare class BeautifyConsole {
      * 初始化配置项
      */
     config(config: {
-        type?: logType[];
+        type?: LogType[];
         title?: string;
     }): void;
     /**
      * 设置显示/隐藏console日志
      * @param showLog 是否打印日志 type { boolean }
-     * @param type 需要设置的日志类型日志 type { logType }
+     * @param type 需要设置的日志类型日志 type { LogType }
      */
     private setShowLog;
     /**
      * 重置console日志
      *
-     * @param type 需要设置的日志类型日志 type { logType }
+     * @param type 需要设置的日志类型日志 type { LogType }
      *
      * @returns BeautifyConsole
      */
@@ -64,19 +55,19 @@ export declare class BeautifyConsole {
     /**
      * 打开console日志
      *
-     * @param type 需要设置的日志类型日志 type { logType }
+     * @param type 需要设置的日志类型日志 type { LogType }
      *
      * @returns BeautifyConsole
      */
-    open(type?: logType): BeautifyConsole;
+    open(type?: LogType): BeautifyConsole;
     /**
      * 关闭console日志
      *
-     * @param type 需要设置的日志类型日志 type { logType }
+     * @param type 需要设置的日志类型日志 type { LogType }
      *
      * @returns BeautifyConsole
      */
-    close(type?: logType): BeautifyConsole;
+    close(type?: LogType): BeautifyConsole;
     /**
      * 重置开始的填充文本console日志，默认如info类型的开始填充： `cbeautify-console-log info: -> `
      * @param type type { consoleType }
@@ -85,4 +76,3 @@ export declare class BeautifyConsole {
      */
     setPadStartText(config: PadStartText): BeautifyConsole;
 }
-export {};

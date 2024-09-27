@@ -1,11 +1,12 @@
 {
   "name": "beautify-console-log",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error. It can display the number of rows where the log is printed.",
   "keywords": [
     "typescript",
     "js",
     "log",
+    "logger",
     "console",
     "console log",
     "console.log",
@@ -19,7 +20,9 @@
     "node log",
     "Display the number of log lines",
     "控制台日志美化",
-    "console.log美化"
+    "console.log美化",
+    "console美化",
+    "console调试"
   ],
   "main": "dist/index.js",
   "types": "lib/index.d.ts",
@@ -29,7 +32,7 @@
     "tscbuild": "tsc",
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
     "builddev": "cross-env NODE_ENV=development npx webpack --mode=development",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
