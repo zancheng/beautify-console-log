@@ -51,13 +51,13 @@ yarn add beautify-console-log
 |param                          |type                         |description                         |
 |-------------------------------|-----------------------------|-----------------------------|
 |title                          |String                       |Custom log header                   |
-|logType                        |Array<String>               |The type of log displayed, set to only display the corresponding log type(`"info"`、`"log"`、`"warn"`、`"error"`)|
+|type                        |Array<String>               |The type of log displayed, set to only display the corresponding log type(`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'custom title',
-    logType: ['info', 'error']
+    type: ['info', 'error']
 })
 // The usage method is consistent with the normal console.info
 log.info(1234, '4', [3, 5]);
@@ -159,7 +159,7 @@ const log = BeautifyConsole.getInstance();
 
 log.config({
     title: 'custom title',
-    logType: ['info', 'error']
+    type: ['info', 'error']
 })
 
 log.reset() // 打开所有类型日志
@@ -218,7 +218,7 @@ log.setPadStartText('log', 'hello world').log(1234)
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'example pad start text', // Log header content filled on the left
-    logType: ['info', 'error', 'warn', 'log'], // Display partial log types
+    type: ['info', 'error', 'warn', 'log'], // Display partial log types
 })
 log.info(1234, '4', [3, 5]);
 log.log(1234, '4', [3, 5]);

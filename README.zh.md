@@ -44,13 +44,13 @@ yarn add beautify-console-log
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
 |title                          |String                       |自定义日志头                   |
-|logType                        |Array<String>               |显示的日志类型，设置后只显示对应的日志类型(`"info"`、`"log"`、`"warn"`、`"error"`)|
+|type                        |Array<String>               |显示的日志类型，设置后只显示对应的日志类型(`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'custom title',
-    logType: ['info', 'error']
+    type: ['info', 'error']
 })
 // 使用方式与正常的console.info()一致
 log.info(1234, '4', [3, 5]);
@@ -152,7 +152,7 @@ const log = BeautifyConsole.getInstance();
 
 log.config({
     title: 'custom title',
-    logType: ['info', 'error']
+    type: ['info', 'error']
 })
 
 log.reset() // 打开所有类型日志
@@ -214,7 +214,7 @@ console.log('----------------config start--------------------')
 
 log.config({
     title: 'custom title',
-    logType: ['info', 'error']
+    type: ['info', 'error']
 })
 
 log.warn('custom warn', 'no show')
@@ -236,7 +236,7 @@ log.warn('reset warn')
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'example pad start text', // 左侧填充的日志头内容
-    logType: ['info', 'error', 'warn', 'log'], // 显示部分日志类型
+    type: ['info', 'error', 'warn', 'log'], // 显示部分日志类型
 })
 log.info(1234, '4', [3, 5]);
 log.log(1234, '4', [3, 5]);
