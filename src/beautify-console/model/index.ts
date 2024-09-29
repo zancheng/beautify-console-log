@@ -8,12 +8,12 @@
  * ```
  */
 export interface BaseConfig {
-  type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]
-  title?: string 
+  type?: LogType[] | ("info" | "log" | "warn" | "error")[];
+  title?: string;
 }
 /**
  * 背景编号：
- * 
+ *
  *  ``` text
  *  ColorType.black: 40黑，
  *  ColorType.red: 41红，
@@ -102,7 +102,7 @@ export interface PadStartStyle {
  */
 export interface PadStartText {
   title: string;
-  logType: LogType | 'info' | 'log' | 'warn' | 'error';
+  logType: LogType | "info" | "log" | "warn" | "error";
   style?: PadStartStyle;
 }
 

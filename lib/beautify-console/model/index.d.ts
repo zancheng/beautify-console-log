@@ -8,7 +8,7 @@
  * ```
  */
 export interface BaseConfig {
-    type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[];
+    type?: LogType[] | ("info" | "log" | "warn" | "error")[];
     title?: string;
 }
 /**
@@ -89,7 +89,7 @@ export interface PadStartStyle {
  */
 export interface PadStartText {
     title: string;
-    logType: LogType | 'info' | 'log' | 'warn' | 'error';
+    logType: LogType | "info" | "log" | "warn" | "error";
     style?: PadStartStyle;
 }
 /**

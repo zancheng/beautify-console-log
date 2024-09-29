@@ -16,7 +16,7 @@ import {
 const baseColor = (
   option: BaseColorType = {},
   text: string,
-  type: LogType
+  type: LogType,
 ): string => {
   const { color = ColorType.white, bgColor = ColorType.white } = option;
   const backgroundColor: number = (bgColor || 0) + 10;
@@ -34,13 +34,13 @@ const baseColor = (
 const padText: Record<string, any> = {
   info(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white }
+    style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white },
   ) {
     return [baseColor(style, text, LogType.info)];
   },
   error(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white }
+    style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white },
   ) {
     return [baseColor(style, text, LogType.error)];
   },
@@ -49,13 +49,13 @@ const padText: Record<string, any> = {
     style: BaseColorType = {
       bgColor: ColorType.yellow,
       color: ColorType.black,
-    }
+    },
   ) {
     return [baseColor(style, text, LogType.warn)];
   },
   log(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white }
+    style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white },
   ) {
     return [baseColor(style, text, LogType.log)];
   },
@@ -126,10 +126,9 @@ export class BeautifyConsole {
 
   private static instance: BeautifyConsole;
 
-
   /**
    * Singleton mode
-   */  public static getInstance(): BeautifyConsole {
+   */ public static getInstance(): BeautifyConsole {
     if (!this.instance) {
       this.instance = new BeautifyConsole();
     }
@@ -154,7 +153,7 @@ export class BeautifyConsole {
         this.setPadStartText({
           logType: item,
           title,
-        })
+        }),
       );
     }
   }
@@ -166,7 +165,7 @@ export class BeautifyConsole {
    */
   private setShowLog(
     showLog: boolean,
-    type?: LogType | "info" | "log" | "warn" | "error"
+    type?: LogType | "info" | "log" | "warn" | "error",
   ) {
     const setShowLogFunction = {
       info: () => {
@@ -230,7 +229,7 @@ export class BeautifyConsole {
    * @returns BeautifyConsole
    */
   public open(
-    type?: LogType | "info" | "log" | "warn" | "error"
+    type?: LogType | "info" | "log" | "warn" | "error",
   ): BeautifyConsole {
     this.setShowLog(true, type);
     return this;
@@ -244,7 +243,7 @@ export class BeautifyConsole {
    * @returns BeautifyConsole
    */
   public close(
-    type?: LogType | "info" | "log" | "warn" | "error"
+    type?: LogType | "info" | "log" | "warn" | "error",
   ): BeautifyConsole {
     this.setShowLog(false, type);
     return this;
@@ -263,25 +262,25 @@ export class BeautifyConsole {
         info: () => {
           this.info = console.info.bind(
             this,
-            ...padText[LogType.info](config.title, config.style)
+            ...padText[LogType.info](config.title, config.style),
           );
         },
         error: () => {
           this.error = console.error.bind(
             this,
-            ...padText[LogType.error](config.title, config.style)
+            ...padText[LogType.error](config.title, config.style),
           );
         },
         warn: () => {
           this.warn = console.warn.bind(
             this,
-            ...padText[LogType.warn](config.title, config.style)
+            ...padText[LogType.warn](config.title, config.style),
           );
         },
         log: () => {
           this.log = console.log.bind(
             this,
-            ...padText[LogType.log](config.title, config.style)
+            ...padText[LogType.log](config.title, config.style),
           );
         },
       };
