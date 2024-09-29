@@ -1,4 +1,17 @@
 /**
+ * 基础配置
+ * ```text
+ * {
+ *  type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[];
+ *  title?: string;
+ * }
+ * ```
+ */
+export interface BaseConfig {
+  type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]
+  title?: string 
+}
+/**
  * 背景编号：
  * 
  *  ``` text
@@ -82,14 +95,14 @@ export interface PadStartStyle {
  * ```text
  * {
  *  title: string;
- *  logType: LogType;
+ *  logType: LogType | 'info' | 'log' | 'warn' | 'error';
  *  style?: PadStartStyle;
  * }
  * ```
  */
 export interface PadStartText {
   title: string;
-  logType: LogType;
+  logType: LogType | 'info' | 'log' | 'warn' | 'error';
   style?: PadStartStyle;
 }
 

@@ -13,7 +13,7 @@ test("SDK getHostInfo", () => {
     log
       .setPadStartText({
         title: "hello world ->",
-        logType: LogType.info,
+        logType: 'info',
       })
       .log(1234),
   ).toBe(undefined);

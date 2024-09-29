@@ -44,14 +44,14 @@ yarn add beautify-console-log
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
 |title                          |String                       |自定义日志头                   |
-|type                        |LogType[]              |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`)|
+|type                        |LogType[]  、 ('info' 、 'log' 、 'warn' 、 'error')[]             |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
 log.config({
     title: 'custom title',
-    type: [LogType.info, LogType.error]
+    type: [LogType.info, LogType.error, 'log']
 })
 // 使用方式与正常的console.info()一致
 log.info(1234, '4', [3, 5]);
@@ -100,7 +100,7 @@ log.error('warn');
 使用`log.close()`关闭日志后，可以`log.open()`进行打开对应的日志类型，打开所有类型日志时，不传参（支持链式调用）。
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
-|LogType?                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
+|LogType 、 "info" 、 "log" 、 "warn" 、 "error"                      |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -116,7 +116,7 @@ log.open(LogType.info).open('error') // 打开info日志
 关闭日志，可以关闭全部日志或者某个类型的日志。
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
-|LogType?                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
+|LogType 、 "info" 、 "log" 、 "warn" 、 "error"                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`，或者不传|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -134,7 +134,7 @@ log.close(LogType.info).open('log')
 |-------------------------------|-----------------------------|-----------------------------|
 ||PadStartText||
 |title                          |String                       |自定义日志头                   |
-|logType                        |String              |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`|
+|logType  | LogType 、 "info" 、 "log" 、 "warn" 、 "error"                       |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |style                        |Object              ||
 |                        |├──color              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|
 |                        |└──bgColor              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|

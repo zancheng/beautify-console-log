@@ -1,4 +1,10 @@
-import { BaseColorType, ColorType, LogType, PadStartText } from "./model";
+import {
+  BaseColorType,
+  BaseConfig,
+  ColorType,
+  LogType,
+  PadStartText,
+} from "./model";
 
 /**
  * 转换node使用的日志颜色
@@ -10,19 +16,15 @@ import { BaseColorType, ColorType, LogType, PadStartText } from "./model";
 const baseColor = (
   option: BaseColorType = {},
   text: string,
-  type: LogType,
+  type: LogType
 ): string => {
   const { color = ColorType.white, bgColor = ColorType.white } = option;
   const backgroundColor: number = (bgColor || 0) + 10;
   const textColor: number = color || 0;
   if (typeof process === "object" && process.title === "node") {
-    return `\x1b[${
-      backgroundColor
-    };${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
+    return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
   } else {
-    return `\x1b[${
-      backgroundColor
-    };${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
+    return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
   }
 };
 
@@ -32,13 +34,13 @@ const baseColor = (
 const padText: Record<string, any> = {
   info(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white },
+    style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white }
   ) {
     return [baseColor(style, text, LogType.info)];
   },
   error(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white },
+    style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white }
   ) {
     return [baseColor(style, text, LogType.error)];
   },
@@ -47,13 +49,13 @@ const padText: Record<string, any> = {
     style: BaseColorType = {
       bgColor: ColorType.yellow,
       color: ColorType.black,
-    },
+    }
   ) {
     return [baseColor(style, text, LogType.warn)];
   },
   log(
     text: string = "beautify-console-log ",
-    style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white },
+    style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white }
   ) {
     return [baseColor(style, text, LogType.log)];
   },
@@ -66,7 +68,7 @@ const padText: Record<string, any> = {
  *
  * 1.使用：
  * ```
- * 
+ *
  * import BeautifyConsole from "beautify-console-log";
  * const log = BeautifyConsole.getInstance();
  * log.log(1, [2, 3], '4');
@@ -78,7 +80,7 @@ const padText: Record<string, any> = {
  *
  * 4.设置开始的填充文本console日志：Log.setPadStartText()
  *
- * 
+ *
  * ```
  *  {
  *    info: (...args: any[]) => void;
@@ -87,7 +89,7 @@ const padText: Record<string, any> = {
  *    log: (...args: any[]) => void;
  *    static getInstance(): BeautifyConsole;
  *    config(config: {
- *        type?: LogType[];
+ *        type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[];
  *        title?: string;
  *    }): void;
  *    reset(): BeautifyConsole;
@@ -105,14 +107,29 @@ export class BeautifyConsole {
   private warnPadStartText: string[] = padText[LogType.warn]();
   private logPadStartText: string[] = padText[LogType.log]();
 
+  /**
+   * Print info type information
+   */
   info = console.info.bind(this, ...this.infoPadStartText);
+  /**
+   * Print error type information
+   */
   error = console.error.bind(this, ...this.errorPadStartText);
+  /**
+   * Print warn type information
+   */
   warn = console.warn.bind(this, ...this.warnPadStartText);
+  /**
+   * Print log type information
+   */
   log = console.log.bind(this, ...this.logPadStartText);
 
   private static instance: BeautifyConsole;
 
-  public static getInstance(): BeautifyConsole {
+
+  /**
+   * Singleton mode
+   */  public static getInstance(): BeautifyConsole {
     if (!this.instance) {
       this.instance = new BeautifyConsole();
     }
@@ -120,8 +137,10 @@ export class BeautifyConsole {
   }
   /**
    * 初始化配置项
+   * @param config 是否打印日志 type { BaseConfig: {type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]; title?: string} }
+   * 如果配置了type，就只显示配置的日志类型
    */
-  public config(config: { type?: LogType[]; title?: string }) {
+  public config(config: BaseConfig) {
     const {
       type = [LogType.info, LogType.error, LogType.warn, LogType.log],
       title,
@@ -135,7 +154,7 @@ export class BeautifyConsole {
         this.setPadStartText({
           logType: item,
           title,
-        }),
+        })
       );
     }
   }
@@ -143,9 +162,12 @@ export class BeautifyConsole {
   /**
    * 设置显示/隐藏console日志
    * @param showLog 是否打印日志 type { boolean }
-   * @param type 需要设置的日志类型日志 type { LogType }
+   * @param type 需要设置的日志类型日志 type { LogType | 'info' | 'log' | 'warn' | 'error' }
    */
-  private setShowLog(showLog: boolean, type?: LogType) {
+  private setShowLog(
+    showLog: boolean,
+    type?: LogType | "info" | "log" | "warn" | "error"
+  ) {
     const setShowLogFunction = {
       info: () => {
         this.info = showLog
@@ -193,8 +215,6 @@ export class BeautifyConsole {
   /**
    * 重置console日志
    *
-   * @param type 需要设置的日志类型日志 type { LogType }
-   *
    * @returns BeautifyConsole
    */
   public reset(): BeautifyConsole {
@@ -205,11 +225,13 @@ export class BeautifyConsole {
   /**
    * 打开console日志
    *
-   * @param type 需要设置的日志类型日志 type { LogType }
+   * @param type 需要设置的日志类型日志 type { LogType | 'info' | 'log' | 'warn' | 'error' }
    *
    * @returns BeautifyConsole
    */
-  public open(type?: LogType): BeautifyConsole {
+  public open(
+    type?: LogType | "info" | "log" | "warn" | "error"
+  ): BeautifyConsole {
     this.setShowLog(true, type);
     return this;
   }
@@ -217,19 +239,22 @@ export class BeautifyConsole {
   /**
    * 关闭console日志
    *
-   * @param type 需要设置的日志类型日志 type { LogType }
+   * @param type 需要设置的日志类型日志 type { LogType | 'info' | 'log' | 'warn' | 'error' }
    *
    * @returns BeautifyConsole
    */
-  public close(type?: LogType): BeautifyConsole {
+  public close(
+    type?: LogType | "info" | "log" | "warn" | "error"
+  ): BeautifyConsole {
     this.setShowLog(false, type);
     return this;
   }
 
   /**
    * 重置开始的填充文本console日志，默认如info类型的开始填充： `cbeautify-console-log info: -> `
-   * @param type type { consoleType }
-   * @param text type { any }
+   * @param title type { string }
+   * @param logType type { logType | 'info' | 'log' | 'warn' | 'error' }
+   * @param style type { PadStartStyle }
    * @returns BeautifyConsole
    */
   public setPadStartText(config: PadStartText): BeautifyConsole {
@@ -238,25 +263,25 @@ export class BeautifyConsole {
         info: () => {
           this.info = console.info.bind(
             this,
-            ...padText[LogType.info](config.title, config.style),
+            ...padText[LogType.info](config.title, config.style)
           );
         },
         error: () => {
           this.error = console.error.bind(
             this,
-            ...padText[LogType.error](config.title, config.style),
+            ...padText[LogType.error](config.title, config.style)
           );
         },
         warn: () => {
           this.warn = console.warn.bind(
             this,
-            ...padText[LogType.warn](config.title, config.style),
+            ...padText[LogType.warn](config.title, config.style)
           );
         },
         log: () => {
           this.log = console.log.bind(
             this,
-            ...padText[LogType.log](config.title, config.style),
+            ...padText[LogType.log](config.title, config.style)
           );
         },
       };
