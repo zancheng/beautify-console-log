@@ -177,6 +177,73 @@ log.reset() // 打开所有类型日志
 log.info('reset log')
 ```
 
+## Types
+### BaseConfig
+```json
+{
+  type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]
+  title?: string 
+}
+```
+### BaseColorType
+```json
+{
+  color?: ColorType;
+  bgColor?: ColorType;
+}
+```
+### PadStartStyle
+```json
+{
+  color: ColorType;
+  bgColor: ColorType;
+}
+```
+### PadStartText
+```json
+{
+  title: string;
+  logType: LogType | 'info' | 'log' | 'warn' | 'error';
+  style?: PadStartStyle;
+}
+```
+### ColorType
+```json
+{
+  black = 90,
+  red = 91,
+  green = 92,
+  yellow = 93,
+  blue = 94,
+  purple = 95,
+  cyan = 96,
+  white = 97,
+}
+```
+### LogType
+```json
+{
+  info = "info",
+  warn = "warn",
+  error = "error",
+  log = "log",
+}
+```
+
+## Utils
+### formatConsoleStr
+
+```
+import BeautifyConsole from "beautify-console-log";
+import { formatConsoleStr } from 'beautify-console-log/lib/utils';
+
+// node.js
+log.info(formatConsoleStr('string=%s number=%d', 'string', 1).join(''))
+// browser
+log.info(...formatConsoleStr('string=%s number=%d', 'string', 1))
+
+```
+
 ## Use
 
 
