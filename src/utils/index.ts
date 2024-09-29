@@ -3,7 +3,7 @@
  * @param params any[]
  * @returns 
  */
-export function formatConsoleStr(...params: any[]): any[] {
+export const formatConsoleStr = (...params: any[]): any[] => {
     let paramArray = params.slice(1)
     const formatRegExp = /%[sdof]/g
     if (params.length > 1 && typeof params[0] === 'string') {

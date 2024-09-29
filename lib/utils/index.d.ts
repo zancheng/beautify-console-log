@@ -3,4 +3,4 @@
  * @param params any[]
  * @returns
  */
-export declare function formatConsoleStr(...params: any[]): any[];
+export declare const formatConsoleStr: (...params: any[]) => any[];
