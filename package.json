@@ -1,12 +1,13 @@
 {
   "name": "beautify-console-log",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "This is a further beautification and encapsulation of the 'console' object, including console. log, console. info, console. warn, and console. error. It can display the number of rows where the log is printed.",
   "keywords": [
     "typescript",
     "js",
     "log",
     "logger",
+    "logging",
     "console",
     "console log",
     "console.log",
@@ -19,6 +20,8 @@
     "styles",
     "shell",
     "terminal",
+    "print",
+    "printer",
     "log",
     "node.js",
     "node.js console",
