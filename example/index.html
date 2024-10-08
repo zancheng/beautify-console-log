@@ -13,17 +13,17 @@
         log.info(1234, '4', [3, 5])
 
         log.config({
-    title: '222',
-    type: ['error', 'info', 'log'],
-  })
-  log.setPadStartText({
-    style: {
-      color: 91,
-      bgColor: 91,
-    },
-    title: "111",
-    logType: "info"
-  })
+            title: '222',
+            type: ['error', 'info', 'log'],
+        })
+        log.setPadStartText({
+            style: {
+            color: 91,
+            bgColor: 91,
+            },
+            title: "111",
+            logType: "info"
+        })
         log.log({
             "name": "chengzan"
         })
@@ -31,10 +31,8 @@
         log.close().warn('no show')
 
         log.open().log('show log')
-
+        log.info(...BeautifyConsole.utils.formatConsoleStr('string=%s number=%d', 'string', 1))
         log.error(1234)
-
-
         console.log('------------------------------------------------')
         console.log('--------Set log header text and style-----------')
 
@@ -70,6 +68,7 @@
         log.reset()
         log.open()
         log.info('reset log')
+        log.warn('reset warn')
         log.warn('reset warn')
     </script>
 </body>
