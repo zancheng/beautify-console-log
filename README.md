@@ -192,28 +192,28 @@ log.info('reset log')
 
 ## Types
 ### BaseConfig
-```json
+```typescript
 {
   type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]
   title?: string 
 }
 ```
 ### BaseColorType
-```json
+```typescript
 {
   color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
   bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 ```
 ### PadStartStyle
-```json
+```typescript
 {
   color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
   bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 ```
 ### PadStartText
-```json
+```typescript
 {
   title: string;
   logType: LogType | 'info' | 'log' | 'warn' | 'error';
@@ -221,7 +221,7 @@ log.info('reset log')
 }
 ```
 ### ColorType
-```json
+```typescript
 {
   black = 90,
   red = 91,
@@ -234,7 +234,7 @@ log.info('reset log')
 }
 ```
 ### LogType
-```json
+```typescript
 {
   info = "info",
   warn = "warn",

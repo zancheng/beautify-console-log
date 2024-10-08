@@ -185,28 +185,28 @@ log.info('reset log')
 
 ## Types 类型定义
 ### BaseConfig
-```json
+```typescript
 {
   type?: LogType[] | ('info' | 'log' | 'warn' | 'error')[]
   title?: string 
 }
 ```
 ### BaseColorType
-```json
+```typescript
 {
   color?: ColorType;
   bgColor?: ColorType;
 }
 ```
 ### PadStartStyle
-```json
+```typescript
 {
   color?: ColorType;
   bgColor?: ColorType;
 }
 ```
 ### PadStartText
-```json
+```typescript
 {
   title: string;
   logType: LogType | 'info' | 'log' | 'warn' | 'error';
@@ -214,7 +214,7 @@ log.info('reset log')
 }
 ```
 ### ColorType
-```json
+```typescript
 {
   black = 90,
   red = 91,
@@ -227,7 +227,7 @@ log.info('reset log')
 }
 ```
 ### LogType
-```json
+```typescript
 {
   info = "info",
   warn = "warn",
