@@ -15,27 +15,27 @@ export interface BaseConfig {
  * 背景编号：
  *
  *  ``` text
- *  ColorType.black: 40黑，
- *  ColorType.red: 41红，
- *  ColorType.green: 42绿，
- *  ColorType.yellow: 43黄，
- *  ColorType.blue: 44蓝，
- *  ColorType.purple: 45紫，
- *  ColorType.cyan: 46深绿，
- *  ColorType.white: 47白色
+ *  ColorType.black: 100黑，
+ *  ColorType.red: 101红，
+ *  ColorType.green: 102绿，
+ *  ColorType.yellow: 103黄，
+ *  ColorType.blue: 104蓝，
+ *  ColorType.purple: 105紫，
+ *  ColorType.cyan: 106深绿，
+ *  ColorType.white: 107白色
  *  ```
  * 字色编号：
  * ``` text
- *  ColorType.black: 30黑，
- *  ColorType.red: 31红，
- *  ColorType.green: 32绿，
- *  ColorType.yellow: 33黄，
- *  ColorType.blue: 34蓝，
- *  ColorType.purple: 35紫，
- *  ColorType.cyan: 36深绿，
- *  ColorType.white: 37白色
+ *  ColorType.black: 90黑，
+ *  ColorType.red: 91红，
+ *  ColorType.green: 92绿，
+ *  ColorType.yellow: 93黄，
+ *  ColorType.blue: 94蓝，
+ *  ColorType.purple: 95紫，
+ *  ColorType.cyan: 96深绿，
+ *  ColorType.white: 97白色
  * ```
- * 30黑，31红，32绿，33黄，34蓝，35紫，36深绿，37白色
+ * 90黑，91红，92绿，93黄，94蓝，95紫，96深绿，97白色
  * 0 终端默认设置（黑底白字）
  * 1 高亮显示
  * 7 反显
@@ -50,14 +50,6 @@ export enum ColorType {
   purple = 95,
   cyan = 96,
   white = 97,
-  // black_bg: 40,
-  // red_bg: 41,
-  // green_bg: 42,
-  // yellow_bg: 43,
-  // blue_bg: 44,
-  // purple_bg: 45,
-  // cyan_bg: 46,
-  // white_bg: 47,
 }
 
 /**
