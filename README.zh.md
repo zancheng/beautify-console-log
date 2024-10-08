@@ -136,8 +136,8 @@ log.close(LogType.info).open('log')
 |title                          |String                       |自定义日志头                   |
 |logType  | LogType 、 "info" 、 "log" 、 "warn" 、 "error"                       |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |style                        |Object              ||
-|                        |├──color?    (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
-|                        |└──bgColor?  (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |├──color?    (ColorType 、 'black' 、 'red' 、 'green' 、 'yellow' 、 'blue' 、 'purple' 、 'cyan' 、 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |└──bgColor?  (ColorType 、 'black' 、 'red' 、 'green' 、 'yellow' 、 'blue' 、 'purple' 、 'cyan' 、 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
