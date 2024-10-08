@@ -64,14 +64,14 @@ export enum ColorType {
  * 默认填充文本样式
  * ```text
  * {
- *  color?: ColorType;
- *  bgColor?: ColorType;
+ *  color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+ *  bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
  * }
  * ```
  */
 export interface BaseColorType {
-  color?: ColorType;
-  bgColor?: ColorType;
+  color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+  bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 
 // type logType = 'info' | 'error' | 'warn' | 'log'
@@ -80,14 +80,14 @@ export interface BaseColorType {
  * 左侧填充文本样式
  * ```text
  * {
- *  color: ColorType;
- *  bgColor: ColorType;
+ *  color: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+ *  bgColor: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
  * }
  * ```
  */
 export interface PadStartStyle {
-  color: ColorType;
-  bgColor: ColorType;
+  color: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+  bgColor: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 
 /**

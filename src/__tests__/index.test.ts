@@ -1,5 +1,5 @@
 import { formatConsoleStr } from "../utils";
-import { LogType } from "../beautify-console/model";
+import { ColorType, LogType } from "../beautify-console/model";
 import BeautifyConsole from "../index";
 
 test("BeautifyConsole test", () => {
@@ -12,6 +12,18 @@ test("BeautifyConsole test", () => {
     1,
     "",
   ]);
+  log.config({
+    title: '222',
+    type: ['error', 'info', 'log'],
+  })
+  log.setPadStartText({
+    style: {
+      color: "green",
+      bgColor: ColorType.blue,
+    },
+    title: "111",
+    logType: "info"
+  })
   expect(
     log.info(formatConsoleStr("string=%s number=%d", "string", 1).join("")),
   ).toBe(undefined);

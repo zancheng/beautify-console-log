@@ -18,9 +18,29 @@ const baseColor = (
   text: string,
   type: LogType,
 ): string => {
-  const { color = ColorType.white, bgColor = ColorType.white } = option;
-  const backgroundColor: number = (bgColor || 0) + 10;
-  const textColor: number = color || 0;
+  let { color = ColorType.white, bgColor = ColorType.white } = option;
+  if (typeof color === 'string') {
+    const keys = Object.keys(ColorType)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i]
+      if (element === color) {
+        color = ColorType[element]
+        break
+      }
+    }
+  }
+  if (typeof bgColor === 'string') {
+    const keys = Object.keys(ColorType)
+    for (let i = 0; i < keys.length; i++) {
+      const element = keys[i]
+      if (element === bgColor) {
+        bgColor = ColorType[element]
+        break
+      }
+    }
+  }
+  const backgroundColor: number = (Number(bgColor) || 0) + 10;
+  const textColor: number = Number(color) || 0;
   if (typeof process === "object" && process.title === "node") {
     return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
   } else {

@@ -143,8 +143,8 @@ Set the text content and style of the log header
 |title                          |String                       |Custom log header                   |
 |logType | LogType 、 "info" 、 "log" 、 "warn" 、 "error"              |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |style                        |Object              ||
-|                        |├──color    (ColorType)          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
-|                        |└──bgColor  (ColorType)            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |├──color    (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |└──bgColor  (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
@@ -158,6 +158,19 @@ log.close(LogType.info).open(LogType.log)
 log.setPadStartText({
     title: "hello world ->",
     logType: LogType.info,
+    style: {
+      color: ColorType.yellow,
+      bgColor: ColorType.purple,
+    }
+}).log(1234)
+// OR
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+    style: {
+      color: 'black',
+      bgColor: 'purple',
+    }
 }).log(1234)
 ```
 
@@ -188,15 +201,15 @@ log.info('reset log')
 ### BaseColorType
 ```json
 {
-  color?: ColorType;
-  bgColor?: ColorType;
+  color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+  bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 ```
 ### PadStartStyle
 ```json
 {
-  color: ColorType;
-  bgColor: ColorType;
+  color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+  bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
 ```
 ### PadStartText

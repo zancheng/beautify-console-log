@@ -136,8 +136,8 @@ log.close(LogType.info).open('log')
 |title                          |String                       |自定义日志头                   |
 |logType  | LogType 、 "info" 、 "log" 、 "warn" 、 "error"                       |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |style                        |Object              ||
-|                        |├──color              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|
-|                        |└──bgColor              |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`,`cyan`,`white`|
+|                        |├──color?    (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |└──bgColor?  (ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
@@ -147,9 +147,23 @@ log.close() // 关闭所有类型日志
 log.close(LogType.info) // 关闭info日志
 // 或者
 log.close(LogType.info).open('log')
+
 log.setPadStartText({
     title: "hello world ->",
     logType: LogType.info,
+    style: {
+      color: ColorType.yellow,
+      bgColor: ColorType.purple,
+    }
+}).log(1234)
+// 或者
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+    style: {
+      color: 'black',
+      bgColor: 'purple',
+    }
 }).log(1234)
 ```
 
@@ -187,8 +201,8 @@ log.info('reset log')
 ### PadStartStyle
 ```json
 {
-  color: ColorType;
-  bgColor: ColorType;
+  color?: ColorType;
+  bgColor?: ColorType;
 }
 ```
 ### PadStartText

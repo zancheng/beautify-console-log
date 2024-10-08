@@ -12,6 +12,18 @@
 
         log.info(1234, '4', [3, 5])
 
+        log.config({
+    title: '222',
+    type: ['error', 'info', 'log'],
+  })
+  log.setPadStartText({
+    style: {
+      color: 91,
+      bgColor: 91,
+    },
+    title: "111",
+    logType: "info"
+  })
         log.log({
             "name": "chengzan"
         })
@@ -30,7 +42,7 @@
             title: 'hello world:',
             logType: 'log',
             style: {
-                color: 'red',
+                color: 'white',
                 bgColor: 'green'
             }
         }).log(1234)
@@ -42,7 +54,7 @@
 
 
         log.config({
-            title: 'custom title',
+            title: 'custom title ',
             logType: ['info', 'error']
         })
 
