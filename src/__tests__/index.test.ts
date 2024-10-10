@@ -4,6 +4,8 @@ import BeautifyConsole from "../index";
 
 test("BeautifyConsole test", () => {
   const log = BeautifyConsole.getInstance();
+  const log2 = new BeautifyConsole();
+  log2.info('log2', 111111);
   expect(log.info(1234, "4", [3, 5])).toBe(undefined);
   expect(formatConsoleStr("string=%s number=%d", "string", 1)).toStrictEqual([
     "string=",

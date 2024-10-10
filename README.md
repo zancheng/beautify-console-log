@@ -44,14 +44,171 @@ or
 yarn add beautify-console-log
 
 ```
+## Use
+1. Simple use
+
+```
+import BeautifyConsole from "beautify-console-log";
+
+const log = BeautifyConsole.getInstance();
+
+//The usage is consistent with the normal console.info()
+
+Log.info(1234, '4', [3, 5]);
+
+```
+
+ or
+```
+import BeautifyConsole from "beautify-console-log";
+const log = new BeautifyConsole();
+log.info(111111);
+```
+ or
+```
+
+const log = new BeautifyConsole();
+
+//The usage is consistent with the normal console.info()
+
+Log.info(1234, '4', [3, 5]);
+
+```
+Or directly use the `dist/index. js` file
+```
+<script src="./dist/index.js">
+<script>
+  const log = BeautifyConsole.default.getInstance()
+  log.info(1234, '4', [3, 5])
+  // OR
+  const log2 = new BeautifyConsole.default()
+  log2.error(111)
+</script>
+
+```
+
+```
+const log = BeautifyConsole.default.getInstance()
+
+log.info(1234, '4', [3, 5])
+
+log.log(1234)
+
+log.close().warn('no show')
+
+log.open().log('show log')
+
+log.error(1234)
+
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).log(1234)
+```
+
+2.  initial configuration
+```
+const log = BeautifyConsole.getInstance();
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
+log.config({
+    title: 'example pad start text', // Log header content filled on the left
+    type: ['error', 'warn'], // Display partial log types, only display logs of "error" and "warn" types
+})
+log.info(1234, '4', [3, 5]);
+log.log(1234, '4', [3, 5]);
+log.warn(1234, '4', [3, 5]);
+log.error(1234, '4', [3, 5]);
+```
+
+3. Supported console types
+
+```
+
+const log = BeautifyConsole.getInstance();
+
+Log.info(1234, '4', [3, 5]);
+
+Log.log(1234, '4', [3, 5]);
+
+Log.warn(1234, '4', [3, 5]);
+
+Log.error(1234, '4', [3, 5]);
+
+```
+
+4. Add custom console log headers
+
+```
+
+const log = BeautifyConsole.getInstance();
+
+log.setPadStartText({
+    title: "hello world ->",
+    logType: LogType.info,
+}).info(1234,'4 ', [3, 5])
+
+```
+5. Close log
+Close the corresponding console log types when passing in parameters, and close all types without passing them.
+supports chain calling.
+```
+// ...
+const log = BeautifyConsole.getInstance();
+log.close(LogType.info);
+log.close(LogType.log);
+log.close(LogType.warn);
+log.close(LogType.error);
+log.close();
+log.close().open(LogType.error);
+
+// or
+log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
+
+// or
+log.close(LogType.error).info('closed error');
+log.close(LogType.error).error('closed error');
+
+// or
+log.close(LogType.error).open(LogType.info);
+log.close(LogType.error).open(LogType.info).info('info...');
+
+```
+
+6. Open log
+Open the corresponding console log types when passing in parameters, and open all types without passing them.
+supports chain calling.
+
+```
+// ...
+const log = BeautifyConsole.getInstance();
+log.open(LogType.info);
+log.open(LogType.log);
+log.open(LogType.warn);
+log.open(LogType.error);
+log.open();
+log.open().close(LogType.info);
+
+//or
+log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
+
+// or
+log.open().info('closed error');
+log.open(LogType.error).error('closed error');
+
+// or
+log.close(LogType.error).open(LogType.info);
+log.close(LogType.error).open(LogType.info).info('info...');
+
+```
 
 ## API
 
 ### config
 |param                          |type                         |description                         |
 |-------------------------------|-----------------------------|-----------------------------|
-|title                          |String                       |Custom log header                   |
-|type                        |LogType[] 、 ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
+||BaseConfig||
+|├──title                          |String                       |Custom log header                   |
+|└──type                        |LogType[] \| ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -62,6 +219,10 @@ log.config({
 })
 // The usage method is consistent with the normal console.info
 log.info(1234, '4', [3, 5]);
+
+// OR
+const log2 = new BeautifyConsole();
+log2.info(111111);
 ```
 ### log
 > The usage method is consistent with the normal console.log
@@ -107,7 +268,7 @@ log.error('warn');
 After using `log.close()` to close the log, you can use `log.open()` to open the corresponding log type. When opening all types of logs, no parameters are passed (support chain calling).
 |type                         |description                         |
 |-----------------------------|-----------------------------|
-|LogType 、 "info" 、 "log" 、 "warn" 、 "error"                   |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
+|LogType \| "info" \| "log" \| "warn" \| "error"                   |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -116,14 +277,14 @@ log.open() // Open all types of logs
 // OR
 log.open(LogType.info) // Open the info log
 // OR
-log.open(LogType.info).open(LogType.error) // Open the info log
+log.open(LogType.info).open('error') // Open the info log
 ```
 
 ### close
 Closing logs allows you to close all logs or a certain type of log.
 |type                         |description                         |
 |-----------------------------|-----------------------------|
-|LogType 、 "info" 、 "log" 、 "warn" 、 "error"                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
+|LogType \| "info" \| "log" \| "warn" \| "error"                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -140,11 +301,11 @@ Set the text content and style of the log header
 |param                          |type                         |description                         |
 |-------------------------------|-----------------------------|-----------------------------|
 ||PadStartText||
-|title                          |String                       |Custom log header                   |
-|logType | LogType 、 "info" 、 "log" 、 "warn" 、 "error"              |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
-|style                        |Object              ||
-|                        |├──color    (ColorType 、 'black' 、 'red' 、 'green' 、 'yellow' 、 'blue' 、 'purple' 、 'cyan' 、 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
-|                        |└──bgColor  (ColorType 、 'black' 、 'red' 、 'green' 、 'yellow' 、 'blue' 、 'purple' 、 'cyan' 、 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|├──title                          |String                       |Custom log header                   |
+|├──logType                        | LogType \| "info" \| "log" \| "warn" \| "error"              |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
+|└──style                        |PadStartStyle              ||
+|                        |├──color    (ColorType \| 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
+|                        |└──bgColor  (ColorType \| 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 ```
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
@@ -256,152 +417,6 @@ log.info(formatConsoleStr('string=%s number=%d', 'string', 1).join(''))
 log.info(...formatConsoleStr('string=%s number=%d', 'string', 1))
 
 ```
-
-## Use
-
-
-
-1. Simple use
-
-```
-import BeautifyConsole from "beautify-console-log";
-
-const log = BeautifyConsole.getInstance();
-
-//The usage is consistent with the normal console.info()
-
-Log.info(1234, '4', [3, 5]);
-
-```
- or
-```
-
-const log = new BeautifyConsole();
-
-//The usage is consistent with the normal console.info()
-
-Log.info(1234, '4', [3, 5]);
-
-```
-Or directly use the `dist/index. js` file
-```
-<script src="./dist/index.js">
-```
-
-```
-const log = BeautifyConsole.default.getInstance()
-
-log.info(1234, '4', [3, 5])
-
-log.log(1234)
-
-log.close().warn('no show')
-
-log.open().log('show log')
-
-log.error(1234)
-
-log.setPadStartText({
-    title: "hello world ->",
-    logType: LogType.info,
-}).log(1234)
-```
-
-2.  initial configuration
-```
-const log = BeautifyConsole.getInstance();
-import { LogType } from 'beautify-console-log/lib/beautify-console/model';
-log.config({
-    title: 'example pad start text', // Log header content filled on the left
-    type: [LogType.info, LogType.error, LogType.warn, LogType.log], // Display partial log types
-})
-log.info(1234, '4', [3, 5]);
-log.log(1234, '4', [3, 5]);
-log.warn(1234, '4', [3, 5]);
-log.error(1234, '4', [3, 5]);
-```
-
-3. Supported console types
-
-```
-
-const log = BeautifyConsole.getInstance();
-
-Log.info(1234, '4', [3, 5]);
-
-Log.log(1234, '4', [3, 5]);
-
-Log.warn(1234, '4', [3, 5]);
-
-Log.error(1234, '4', [3, 5]);
-
-```
-
-4. Add custom console log headers
-
-```
-
-const log = BeautifyConsole.getInstance();
-
-log.setPadStartText({
-    title: "hello world ->",
-    logType: LogType.info,
-}).info(1234,'4 ', [3, 5])
-
-```
-5. Close log
-Close the corresponding console log types when passing in parameters, and close all types without passing them.
-supports chain calling.
-```
-// ...
-const log = BeautifyConsole.getInstance();
-log.close(LogType.info);
-log.close(LogType.log);
-log.close(LogType.warn);
-log.close(LogType.error);
-log.close();
-log.close().open(LogType.error);
-
-// or
-log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
-
-// or
-log.close(LogType.error).info('closed error');
-log.close(LogType.error).error('closed error');
-
-// or
-log.close(LogType.error).open(LogType.info);
-log.close(LogType.error).open(LogType.info).info('info...');
-
-```
-
-6. Open log
-Open the corresponding console log types when passing in parameters, and open all types without passing them.
-supports chain calling.
-
-```
-// ...
-const log = BeautifyConsole.getInstance();
-log.open(LogType.info);
-log.open(LogType.log);
-log.open(LogType.warn);
-log.open(LogType.error);
-log.open();
-log.open().close(LogType.info);
-
-//or
-log.open(LogType.error).open(LogType.log).open(LogType.warn).open(LogType.info);
-
-// or
-log.open().info('closed error');
-log.open(LogType.error).error('closed error');
-
-// or
-log.close(LogType.error).open(LogType.info);
-log.close(LogType.error).open(LogType.info).info('info...');
-
-```
-
 
 ## Contribution
 
