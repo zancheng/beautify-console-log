@@ -11,9 +11,9 @@ Due to most log beautification plugins not being able to locate the **code line*
 
 ## Menu
 - [Effect](#Effect)
+- [Use](#Use)
 - [Tutorial](#Tutorial)
 - [API](#API)
-- [Use](#Use)
 - [Contribution](#Contribution)
 
 ## Effect
