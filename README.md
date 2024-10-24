@@ -11,9 +11,11 @@ Due to most log beautification plugins not being able to locate the **code line*
 
 ## Menu
 - [Effect](#Effect)
+- [Installation](#Installation)
 - [Use](#Use)
-- [Tutorial](#Tutorial)
 - [API](#API)
+- [Types](#Types)
+- [Utils](#Utils)
 - [Contribution](#Contribution)
 
 ## Effect
@@ -28,7 +30,7 @@ Due to most log beautification plugins not being able to locate the **code line*
 </p>
 
 
-## Tutorial
+## Installation
 
 
 ```

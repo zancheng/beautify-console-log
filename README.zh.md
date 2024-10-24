@@ -9,9 +9,11 @@
 
 ## 目录
 - [效果](#效果)
-- [使用说明](#使用说明)
 - [安装教程](#安装教程)
+- [使用说明](#使用说明)
 - [API](#API)
+- [Types](#Types)
+- [Utils](#Utils)
 - [参与贡献](#参与贡献)
 
 
@@ -406,7 +408,7 @@ log.info('reset log')
 }
 ```
 
-## Utils工具
+## Utils
 ### formatConsoleStr
 
 ```

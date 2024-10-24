@@ -1,6 +1,6 @@
 {
   "name": "beautify-console-log",
-  "version": "1.3.9",
+  "version": "1.3.11",
   "description": "This is a further beautification and encapsulation of the 'console' object. You can use it like using \"console. log\", \"console. info\", \"console. warn\", \"console. error\", and it can display the code line information where the log is printed.",
   "keywords": [
     "console",
