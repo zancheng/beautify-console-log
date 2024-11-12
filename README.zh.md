@@ -210,8 +210,8 @@ log.close(LogType.error).open(LogType.info).info('info...');
 ### config
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
-||BaseConfig||
-|├──title                          |String                       |自定义日志头                   |
+|param|BaseConfig||
+|├──title                          |String?                       |自定义日志头，值为空时不显示"title"                   |
 |└──type                           |LogType[]  \| ('info' 、 'log' 、 'warn' 、 'error')[]             |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
@@ -304,7 +304,7 @@ log.close(LogType.info).open('log')
 设置日志头文本内容及文本样式
 |参数名                          |值类型                         |描述                         |
 |-------------------------------|-----------------------------|-----------------------------|
-||PadStartText||
+|param|PadStartText||
 |├──title                          |String                       |自定义日志头                   |
 |├──logType  | LogType \| "info" \| "log" \| "warn" \| "error"                       |`LogType.info`,`LogType.log`,`LogType.warn`,`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |└──style                        |PadStartStyle              ||

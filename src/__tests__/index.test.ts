@@ -23,7 +23,15 @@ test("BeautifyConsole test", () => {
       color: "green",
       bgColor: ColorType.blue,
     },
-    title: "111",
+    title: "",
+    logType: "info"
+  })
+  log.setPadStartText({
+    style: {
+      color: "green",
+      bgColor: ColorType.blue,
+    },
+    title: "",
     logType: "info"
   })
   expect(

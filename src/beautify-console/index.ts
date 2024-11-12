@@ -15,8 +15,8 @@ import {
  */
 const baseColor = (
   option: BaseColorType = {},
-  text: string,
   type: LogType,
+  text?: string,
 ): string => {
   let { color = ColorType.white, bgColor = ColorType.white } = option;
   if (typeof color === 'string') {
@@ -42,9 +42,17 @@ const baseColor = (
   const backgroundColor: number = (Number(bgColor) || 0) + 10;
   const textColor: number = Number(color) || 0;
   if (typeof process === "object" && process.title === "node") {
-    return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}\x1b[0m`;
+    if (text !== '' && text !== undefined && text !== null) {
+      return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}${' '}\x1b[0m`;
+    } else {
+      return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m`;
+    }
   } else {
-    return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}`;
+    if (text !== '' && text !== undefined && text !== null) {
+      return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} \x1b[0m\x1b[100;97m ${text}${' '}`;
+    } else {
+      return `\x1b[${backgroundColor};${textColor};1m ${type.toUpperCase()} `;
+    }
   }
 };
 
@@ -53,31 +61,31 @@ const baseColor = (
  */
 const padText: Record<string, any> = {
   info(
-    text: string = "beautify-console-log ",
+    text: string = "beautify-console-log",
     style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white },
   ) {
-    return [baseColor(style, text, LogType.info)];
+    return [baseColor(style, LogType.info, text)];
   },
   error(
-    text: string = "beautify-console-log ",
+    text: string = "beautify-console-log",
     style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white },
   ) {
-    return [baseColor(style, text, LogType.error)];
+    return [baseColor(style, LogType.error, text)];
   },
   warn(
-    text: string = "beautify-console-log ",
+    text: string = "beautify-console-log",
     style: BaseColorType = {
       bgColor: ColorType.yellow,
       color: ColorType.black,
     },
   ) {
-    return [baseColor(style, text, LogType.warn)];
+    return [baseColor(style, LogType.warn, text)];
   },
   log(
-    text: string = "beautify-console-log ",
+    text: string = "beautify-console-log",
     style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white },
   ) {
-    return [baseColor(style, text, LogType.log)];
+    return [baseColor(style, LogType.log, text)];
   },
 };
 

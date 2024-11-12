@@ -208,8 +208,8 @@ log.close(LogType.error).open(LogType.info).info('info...');
 ### config
 |param                          |type                         |description                         |
 |-------------------------------|-----------------------------|-----------------------------|
-||BaseConfig||
-|├──title                          |String                       |Custom log header                   |
+|param|BaseConfig||
+|├──title                          |String?                       |Custom log header, do not display custom log header when the value is empty                   |
 |└──type                        |LogType[] \| ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
 ```
 import BeautifyConsole from "beautify-console-log";
@@ -302,7 +302,7 @@ log.close(LogType.info).open(LogType.log)
 Set the text content and style of the log header
 |param                          |type                         |description                         |
 |-------------------------------|-----------------------------|-----------------------------|
-||PadStartText||
+|param|PadStartText||
 |├──title                          |String                       |Custom log header                   |
 |├──logType                        | LogType \| "info" \| "log" \| "warn" \| "error"              |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`|
 |└──style                        |PadStartStyle              ||
