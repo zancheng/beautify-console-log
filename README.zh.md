@@ -8,7 +8,7 @@
     > 查看效果请在控制台。
 
 ## 目录
-- [效果](#效果)
+- [效果展示](#效果展示)
 - [安装教程](#安装教程)
 - [使用说明](#使用说明)
 - [API](#API)
@@ -17,7 +17,7 @@
 - [参与贡献](#参与贡献)
 
 
-## 效果
+## 效果展示
 
 <p>
 <img src="./img/3.jpg" style="width: 500px">
@@ -42,6 +42,7 @@ yarn add beautify-console-log
 ## 使用说明
 
 1.  简单使用
+- 为了方便使用（也为了兼容老版本），我把参数定义为多种类型，比如使用`config`配置时，可以传入`type`值为：`LogType`类型，也可以传入字符串`"info"`、`"log"`、`"warn"`、`"error"`。
 ```
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();

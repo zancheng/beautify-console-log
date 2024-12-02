@@ -48,6 +48,7 @@ yarn add beautify-console-log
 ```
 ## Use
 1. Simple use
+- For the convenience of use (and compatibility with older versions), I define parameters as multiple types. For example, when configuring with 'config', you can pass in a 'type' value of 'LogType' type, or pass in strings such as' info ',' log ',' warn ', and' error '`
 
 ```
 import BeautifyConsole from "beautify-console-log";
