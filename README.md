@@ -20,6 +20,9 @@ Due to most log beautification plugins not being able to locate the **code line*
 
 ## Effect
 <p>
+<img src="./img/1.gif" style="width: 500px">
+</p>
+<p>
 <img src="./img/3.jpg" style="width: 500px">
 </p>
 <p>
