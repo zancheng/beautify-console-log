@@ -46,7 +46,7 @@ yarn add beautify-console-log
 
 1.  简单使用
 - 为了方便使用（也为了兼容老版本），我把参数定义为多种类型，比如使用`config`配置时，可以传入`type`值为：`LogType`类型，也可以传入字符串`"info"`、`"log"`、`"warn"`、`"error"`。
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 // 使用方式与正常的console.info()一致
@@ -55,21 +55,21 @@ log.info(1234, '4', [3, 5]);
 ```
 
 或
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = new BeautifyConsole();
 log.info(111111);
 ```
 
 或
-```
+```javascript
 const log = new BeautifyConsole();
 // 使用方式与正常的console.info()一致
 log.info(1234, '4', [3, 5]);
 
 ```
 也可以直接使用 `dist/index.js` 文件
-```
+```javascript
 <script src="./dist/index.js">
 <script>
   const log = BeautifyConsole.default.getInstance()
@@ -79,7 +79,7 @@ log.info(1234, '4', [3, 5]);
   log2.error(111)
 </script>
 ```
-```
+```javascript
 const log = BeautifyConsole.default.getInstance()
 
 log.info(1234, '4', [3, 5])
@@ -128,9 +128,38 @@ log.reset()
 log.info('reset log')
 log.warn('reset warn')
 ```
+如果想在生成环境关闭多余日志，可以这么配置：
+```javascript
+import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
+const log = BeautifyConsole.getInstance();
+
+/**
+ * vite 使用 import.meta.env.MODE 获取环境
+ */
+log.config({
+    title: 'custom title',
+    type: process.env.NODE_ENV === 'product' ? ['error'] : ['log', 'info', 'warn', 'error']
+})
+log.info(1234, '4', [3, 5]); // 不会显示打印
+```
+或者
+```javascript
+import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
+const log = BeautifyConsole.getInstance();
+
+/**
+ * vite 使用 import.meta.env.MODE 获取环境
+ */
+if (process.env.NODE_ENV === 'product') {
+  log.close().open(LogType.error);
+}
+log.info(1234, '4', [3, 5]); // 不会显示打印
+```
 
 2.  初始化配置
-```
+```javascript
 const log = BeautifyConsole.getInstance();
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 log.config({
@@ -145,7 +174,7 @@ log.error(1234, '4', [3, 5]);
 
 
 3.  支持的console类型
-```
+```javascript
 const log = BeautifyConsole.getInstance();
 log.info(1234, '4', [3, 5]);
 log.log(1234, '4', [3, 5]);
@@ -153,7 +182,7 @@ log.warn(1234, '4', [3, 5]);
 log.error(1234, '4', [3, 5]);
 ```
 4.  加入自定义console日志头
-```
+```javascript
 const log = BeautifyConsole.getInstance();
 log.setPadStartText({
     title: "hello world ->",
@@ -166,7 +195,7 @@ log.setPadStartText({
 }).info(1234,'4 ', [3, 5]).info(1234, '4', [3, 5]);
 ```
 5.  关闭日志，传入参数就关闭对应的console日志类型，不传就关闭所有的类型，支持链式调用
-```
+```javascript
 // ...省略
 const log = BeautifyConsole.getInstance();
 log.close(LogType.info);
@@ -188,7 +217,7 @@ log.close(LogType.error).open(LogType.info);
 log.close(LogType.error).open(LogType.info).info('info...');
 ```
 6.  打开日志，传入参数就打开对应的console日志类型，不传就打开所有的类型，支持链式调用
-```
+```javascript
 const log = BeautifyConsole.getInstance();
 log.open(LogType.info);
 log.open(LogType.log);
@@ -217,7 +246,7 @@ log.close(LogType.error).open(LogType.info).info('info...');
 |param|BaseConfig||
 |├──title                          |String?                       |自定义日志头，值为空时不显示"title"                   |
 |└──type                           |LogType[]  \| ('info' 、 'log' 、 'warn' 、 'error')[]             |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -234,7 +263,7 @@ log2.info(111111);
 ```
 ### log
 > 使用方式与正常的console.log()一致
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.log(1234, '4', [3, 5]);
@@ -245,7 +274,7 @@ log.log({
 
 ### info
 > 使用方式与正常的console.info()一致
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.info(1234, '4', [3, 5]);
@@ -256,7 +285,7 @@ log.info({
 
 ### warn
 > 使用方式与正常的console.warn()一致
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.warn(1234, '4', [3, 5]);
@@ -265,7 +294,7 @@ log.warn('warn');
 
 ### error
 > 使用方式与正常的console.error()一致
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.error(1234, '4', [3, 5]);
@@ -277,7 +306,7 @@ log.error('warn');
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
 |LogType \| "info" \| "log" \| "warn" \| "error"                      |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`，或者不传|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -293,7 +322,7 @@ log.open(LogType.info).open('error') // 打开info日志
 |值类型                         |描述                         |
 |-----------------------------|-----------------------------|
 |LogType \| "info" \| "log" \| "warn" \| "error"                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`，或者不传|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -314,7 +343,7 @@ log.close(LogType.info).open('log')
 |└──style                        |PadStartStyle              ||
 |                        |├──color?    (ColorType \|、 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 |                        |└──bgColor?  (ColorType \| 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -345,7 +374,7 @@ log.setPadStartText({
 
 ### reset
 当设置自定义日志头或关闭部分日志等操作后，可以通过`log.reset()`重置。
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -415,7 +444,7 @@ log.info('reset log')
 ## Utils
 ### formatConsoleStr
 
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { formatConsoleStr } from 'beautify-console-log/lib/utils';
 

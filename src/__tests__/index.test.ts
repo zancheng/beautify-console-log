@@ -41,10 +41,10 @@ test("BeautifyConsole test", () => {
     log.info(formatConsoleStr("object=%o", { name: "chengzan" }).join("")),
   ).toBe(undefined);
   expect(log.log({ name: "chengzan" })).toBe(undefined);
-  expect(log.close().warn(1234)).toBe(undefined);
-  expect(log.open().log(1234)).toBe(undefined);
-  expect(log.error(1234)).toBe(undefined);
-  expect(log.warn(1234)).toBe(undefined);
+  expect(log.close().warn('warn')).toBe(undefined);
+  expect(log.open().log('log')).toBe(undefined);
+  expect(log.error('error')).toBe(undefined);
+  expect(log.warn('warn')).toBe(undefined);
   expect(
     log
       .setPadStartText({

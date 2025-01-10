@@ -53,7 +53,7 @@ yarn add beautify-console-log
 1. Simple use
 - For the convenience of use (and compatibility with older versions), I define parameters as multiple types. For example, when configuring with 'config', you can pass in a 'type' value of 'LogType' type, or pass in strings such as' info ',' log ',' warn ', and' error '`
 
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 
 const log = BeautifyConsole.getInstance();
@@ -65,13 +65,13 @@ Log.info(1234, '4', [3, 5]);
 ```
 
  or
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = new BeautifyConsole();
 log.info(111111);
 ```
  or
-```
+```javascript
 
 const log = new BeautifyConsole();
 
@@ -81,7 +81,7 @@ Log.info(1234, '4', [3, 5]);
 
 ```
 Or directly use the `dist/index. js` file
-```
+```javascript
 <script src="./dist/index.js">
 <script>
   const log = BeautifyConsole.default.getInstance()
@@ -90,10 +90,9 @@ Or directly use the `dist/index. js` file
   const log2 = new BeautifyConsole.default()
   log2.error(111)
 </script>
-
 ```
 
-```
+```javascript
 const log = BeautifyConsole.default.getInstance()
 
 log.info(1234, '4', [3, 5])
@@ -111,9 +110,38 @@ log.setPadStartText({
     logType: LogType.info,
 }).log(1234)
 ```
+If you want to turn off redundant logs in the generation environment, you can configure it as follows:
+```javascript
+import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
+const log = BeautifyConsole.getInstance();
+
+/**
+ * Vite uses import.meta.env MODE retrieves the environment
+ */
+log.config({
+    title: 'custom title',
+    type: process.env.NODE_ENV === 'product' ? ['error'] : ['log', 'info', 'warn', 'error']
+})
+log.info(1234, '4', [3, 5]); // Will not display printing
+```
+Or
+```javascript
+import BeautifyConsole from "beautify-console-log";
+import { LogType } from 'beautify-console-log/lib/beautify-console/model';
+const log = BeautifyConsole.getInstance();
+
+/**
+ * Vite uses import.meta.env MODE retrieves the environment
+ */
+if (process.env.NODE_ENV === 'product') {
+  log.close().open(LogType.error);
+}
+log.info(1234, '4', [3, 5]); // Will not display printing
+```
 
 2.  initial configuration
-```
+```javascript
 const log = BeautifyConsole.getInstance();
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 log.config({
@@ -128,7 +156,7 @@ log.error(1234, '4', [3, 5]);
 
 3. Supported console types
 
-```
+```javascript
 
 const log = BeautifyConsole.getInstance();
 
@@ -144,7 +172,7 @@ Log.error(1234, '4', [3, 5]);
 
 4. Add custom console log headers
 
-```
+```javascript
 
 const log = BeautifyConsole.getInstance();
 
@@ -157,7 +185,7 @@ log.setPadStartText({
 5. Close log
 Close the corresponding console log types when passing in parameters, and close all types without passing them.
 supports chain calling.
-```
+```javascript
 // ...
 const log = BeautifyConsole.getInstance();
 log.close(LogType.info);
@@ -184,7 +212,7 @@ log.close(LogType.error).open(LogType.info).info('info...');
 Open the corresponding console log types when passing in parameters, and open all types without passing them.
 supports chain calling.
 
-```
+```javascript
 // ...
 const log = BeautifyConsole.getInstance();
 log.open(LogType.info);
@@ -215,7 +243,7 @@ log.close(LogType.error).open(LogType.info).info('info...');
 |param|BaseConfig||
 |├──title                          |String?                       |Custom log header, do not display custom log header when the value is empty                   |
 |└──type                        |LogType[] \| ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -232,7 +260,7 @@ log2.info(111111);
 ```
 ### log
 > The usage method is consistent with the normal console.log
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.log(1234, '4', [3, 5]);
@@ -243,7 +271,7 @@ log.log({
 
 ### info
 > The usage method is consistent with the normal console.info
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.info(1234, '4', [3, 5]);
@@ -254,7 +282,7 @@ log.info({
 
 ### warn
 > The usage method is consistent with the normal console.warn
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.warn(1234, '4', [3, 5]);
@@ -263,7 +291,7 @@ log.warn('warn');
 
 ### error
 > The usage method is consistent with the normal console.error
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 const log = BeautifyConsole.getInstance();
 log.error(1234, '4', [3, 5]);
@@ -275,7 +303,7 @@ After using `log.close()` to close the log, you can use `log.open()` to open the
 |type                         |description                         |
 |-----------------------------|-----------------------------|
 |LogType \| "info" \| "log" \| "warn" \| "error"                   |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -291,7 +319,7 @@ Closing logs allows you to close all logs or a certain type of log.
 |type                         |description                         |
 |-----------------------------|-----------------------------|
 |LogType \| "info" \| "log" \| "warn" \| "error"                       |`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`, Or not transmitted|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -312,7 +340,7 @@ Set the text content and style of the log header
 |└──style                        |PadStartStyle              ||
 |                        |├──color    (ColorType \| 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')          |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
 |                        |└──bgColor  (ColorType \| 'black' \| 'red' \| 'green' \| 'yellow' \| 'blue' \| 'purple' \| 'cyan' \| 'white')            |`ColorType.black`,`ColorType.red`,`ColorType.green`,`ColorType.yellow`,`ColorType.blue`,`ColorType.purple`,`ColorType.cyan`,`ColorType.white`|
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType, ColorType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();
@@ -343,7 +371,7 @@ log.setPadStartText({
 
 ### reset
 After setting custom log headers or closing some logs, you can reset them through `log.reset()`.
-```
+```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
 const log = BeautifyConsole.getInstance();

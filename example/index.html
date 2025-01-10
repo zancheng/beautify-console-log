@@ -72,6 +72,12 @@
         log.info('reset log')
         log.warn('reset warn')
         log.warn('reset warn')
+
+        console.log('---------Only display error type printing-------')
+        log.close().open('error');
+        log.error('error log'); // 不会显示打印
+        log.info(1234, '4', [3, 5]); // 不会显示打印
+        console.log('----------------config reset--------------------')
     </script>
 </body>
 </html>
