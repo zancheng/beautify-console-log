@@ -64,6 +64,11 @@ export interface BaseColorType {
     color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
     bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
 }
+type ColorKey = keyof typeof ColorType;
+export interface BaseColorType {
+    color?: ColorType | ColorKey;
+    bgColor?: ColorType | ColorKey;
+}
 /**
  * 左侧填充文本样式
  * ```text
@@ -107,3 +112,4 @@ export declare enum LogType {
     error = "error",
     log = "log"
 }
+export {};
