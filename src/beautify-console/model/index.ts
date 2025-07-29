@@ -61,9 +61,17 @@ export enum ColorType {
  * }
  * ```
  */
+// 原 BaseColorType 定义
 export interface BaseColorType {
   color?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
   bgColor?: ColorType | 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'purple' | 'cyan' | 'white';
+}
+
+// 优化后（使用枚举键的字符串字面量）
+type ColorKey = keyof typeof ColorType; // 'black' | 'red' | ... | 'white'
+export interface BaseColorType {
+  color?: ColorType | ColorKey;
+  bgColor?: ColorType | ColorKey;
 }
 
 // type logType = 'info' | 'error' | 'warn' | 'log'

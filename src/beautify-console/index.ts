@@ -59,34 +59,17 @@ const baseColor = (
 /**
  * 日志左侧填充的文字
  */
-const padText: Record<string, any> = {
-  info(
-    text: string = "beautify-console-log",
-    style: BaseColorType = { bgColor: ColorType.blue, color: ColorType.white },
-  ) {
-    return [baseColor(style, LogType.info, text)];
-  },
-  error(
-    text: string = "beautify-console-log",
-    style: BaseColorType = { bgColor: ColorType.red, color: ColorType.white },
-  ) {
-    return [baseColor(style, LogType.error, text)];
-  },
-  warn(
-    text: string = "beautify-console-log",
-    style: BaseColorType = {
-      bgColor: ColorType.yellow,
-      color: ColorType.black,
-    },
-  ) {
-    return [baseColor(style, LogType.warn, text)];
-  },
-  log(
-    text: string = "beautify-console-log",
-    style: BaseColorType = { bgColor: ColorType.green, color: ColorType.white },
-  ) {
-    return [baseColor(style, LogType.log, text)];
-  },
+const createPadText = (logType: LogType, defaultStyle: BaseColorType) => {
+  return (text: string = "beautify-console-log", style: BaseColorType = defaultStyle) => {
+    return [baseColor({ ...defaultStyle, ...style }, logType, text)];
+  };
+};
+
+const padText: Record<LogType, ReturnType<typeof createPadText>> = {
+  info: createPadText(LogType.info, { bgColor: ColorType.blue, color: ColorType.white }),
+  log: createPadText(LogType.log, { bgColor: ColorType.green, color: ColorType.white }),
+  warn: createPadText(LogType.warn, { bgColor: ColorType.yellow, color: ColorType.black }),
+  error: createPadText(LogType.error, { bgColor: ColorType.red, color: ColorType.white }),
 };
 
 /**
