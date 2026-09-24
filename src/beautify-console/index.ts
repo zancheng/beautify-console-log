@@ -271,28 +271,33 @@ export class BeautifyConsole {
     try {
       const setTextFunction = {
         info: () => {
-          this.info = console.info.bind(
-            this,
-            ...padText[LogType.info](config.title, config.style),
+          // 同步回填，否则 open/close/reset/config 重建绑定时会用回旧的默认标题
+          this.infoPadStartText = padText[LogType.info](
+            config.title,
+            config.style,
           );
+          this.info = console.info.bind(console, ...this.infoPadStartText);
         },
         error: () => {
-          this.error = console.error.bind(
-            this,
-            ...padText[LogType.error](config.title, config.style),
+          this.errorPadStartText = padText[LogType.error](
+            config.title,
+            config.style,
           );
+          this.error = console.error.bind(console, ...this.errorPadStartText);
         },
         warn: () => {
-          this.warn = console.warn.bind(
-            this,
-            ...padText[LogType.warn](config.title, config.style),
+          this.warnPadStartText = padText[LogType.warn](
+            config.title,
+            config.style,
           );
+          this.warn = console.warn.bind(console, ...this.warnPadStartText);
         },
         log: () => {
-          this.log = console.log.bind(
-            this,
-            ...padText[LogType.log](config.title, config.style),
+          this.logPadStartText = padText[LogType.log](
+            config.title,
+            config.style,
           );
+          this.log = console.log.bind(console, ...this.logPadStartText);
         },
       };
       if (setTextFunction[config.logType]) {
@@ -301,7 +306,8 @@ export class BeautifyConsole {
         console.error(`type:${config.logType} not supported`);
       }
     } catch (error) {
-      this.error(error);
+      // 这里用原生 console.error，避免 this.error 被 close() 置空后把异常静默吞掉
+      console.error(error);
     }
     return this;
   }
