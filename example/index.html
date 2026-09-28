@@ -20,10 +20,16 @@
         })
         log.setPadStartText({
             style: {
-            color: 91,
-            bgColor: 91,
+                color: 'white',
+                bgColor: 'purple',
             },
             title: "111",
+            logType: "info"
+        })
+        log.info('custom style: white text on purple background')
+        // 自定义样式会一直生效，直到再次设置；不传 style 时恢复该类型的默认配色（info 默认蓝底白字）
+        log.setPadStartText({
+            title: "beautify-console-log",
             logType: "info"
         })
         log.log({
@@ -55,7 +61,7 @@
 
         log.config({
             title: 'custom title',
-            logType: ['info', 'error']
+            type: ['info', 'error']
         })
 
         log.warn('custom warn', 'no show')
@@ -71,11 +77,10 @@
         log.open()
         log.info('reset log')
         log.warn('reset warn')
-        log.warn('reset warn')
 
         console.log('---------Only display error type printing-------')
         log.close().open('error');
-        log.error('error log'); // 不会显示打印
+        log.error('error log'); // 显示打印
         log.info(1234, '4', [3, 5]); // 不会显示打印
         console.log('----------------config reset--------------------')
     </script>
