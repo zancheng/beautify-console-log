@@ -3,11 +3,16 @@
  *
  * 这里使用 process.versions.node 判断，而不是 process.title：
  * 后者在 pm2、Electron、pkg 等打包运行场景下不等于 'node'，会造成误判
+ *
+ * 再叠加一层 window 判断：浏览器里如果被注入了 process 垫片
+ * （如 node-polyfill-webpack-plugin），process.versions.node 也会存在，
+ * 此时应按浏览器处理；Electron 渲染进程同理
  */
-const isNodeEnv = (): boolean =>
+export const isNodeEnv = (): boolean =>
   typeof process !== "undefined" &&
   process.versions !== undefined &&
-  process.versions.node !== undefined;
+  process.versions.node !== undefined &&
+  typeof window === "undefined";
 
 /**
  * 用于切割格式字符串的占位符
@@ -26,7 +31,7 @@ const isToken = (fragment: string): boolean => TOKEN_PATTERN.test(fragment);
  * Error 的 message / stack 不可枚举，需要显式声明白名单才能序列化；
  * 浏览器保留原始对象，交给 DevTools 折叠展示；Node 环境序列化成字符串
  */
-const formatObject = (value: any): any => {
+const formatObject = (value: unknown): unknown => {
   if (value instanceof Error) {
     return JSON.stringify(value, ["message", "stack", "type", "name"]);
   }
@@ -35,7 +40,7 @@ const formatObject = (value: any): any => {
   }
   try {
     return JSON.stringify(value);
-  } catch (error) {
+  } catch {
     // 循环引用
     return "[Circular]";
   }
@@ -43,22 +48,23 @@ const formatObject = (value: any): any => {
 
 /**
  * 格式化字符串，用于兼容console.log('string=%s number=%d', 'string', 1)的写法，把参数进行格式化
- * @param params any[]
- * @returns
+ * @param params unknown[]
+ * @returns 逐段拼接后的结果，数字/对象等非字符串片段保持原类型
  */
-export const formatConsoleStr = (...params: any[]): any[] => {
-  if (params.length < 2 || typeof params[0] !== "string") {
+export const formatConsoleStr = (...params: unknown[]): unknown[] => {
+  const format = params[0];
+  if (params.length < 2 || typeof format !== "string") {
     return params.slice(1);
   }
 
   // 'a=%s b' -> ['a=', '%s', ' b']
-  const result: any[] = params[0].split(TOKEN_SPLITTER);
+  const result: unknown[] = format.split(TOKEN_SPLITTER);
   // 消费参数的游标，从 1 开始跳过格式字符串本身
   let cursor = 1;
 
   for (let index = 0; index < result.length; index++) {
     const token = result[index];
-    if (!isToken(token)) {
+    if (typeof token !== "string" || !isToken(token)) {
       continue;
     }
     const value = params[cursor];

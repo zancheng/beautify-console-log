@@ -1,6 +1,6 @@
 {
   "name": "beautify-console-log",
-  "version": "1.3.17",
+  "version": "1.4.0",
   "description": "This is a further beautification and encapsulation of the 'console' object. You can use it like using \"console. log\", \"console. info\", \"console. warn\", \"console. error\", and it can display the code line information where the log is printed.",
   "keywords": [
     "console",
@@ -45,7 +45,7 @@
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
     "builddev": "cross-env NODE_ENV=development npx webpack --mode=development",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "eslint \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -69,8 +69,6 @@
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
     "ts-loader": "^9.4.4",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
     "typedoc": "^0.25.1",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",

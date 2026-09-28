@@ -5,6 +5,7 @@ import {
   LogType,
   PadStartText,
 } from "./model";
+import { isNodeEnv } from "../utils";
 
 /**
  * ColorType 对应的 CSS 颜色值（浏览器端 %c 样式使用），取 ANSI 亮色系的近似色
@@ -26,6 +27,13 @@ const CSS_COLORS: Record<number, string> = {
  */
 const toCssColor = (value: ColorType | string): string =>
   typeof value === "string" ? value : CSS_COLORS[value] ?? "#ffffff";
+
+/**
+ * 关闭日志时的空实现
+ *
+ * 保持返回 undefined，让 close() 之后的 log.info() 等调用行为和原来一致
+ */
+const noop = (): undefined => undefined;
 
 /**
  * 生成日志头部（类型徽章 + 自定义标题）的 console 参数
@@ -75,7 +83,9 @@ const baseColor = (
         : ColorType.white;
   }
 
-  if (typeof process === "object" && process.title === "node") {
+  // 用 process.versions.node 判断，而不是 process.title：
+  // 后者在 pm2、Electron、pkg 等打包运行场景下不等于 'node'，会造成误判
+  if (isNodeEnv()) {
     const backgroundColor: number = (Number(bgColor) || 0) + 10;
     const textColor: number = Number(color) || 0;
     if (text !== '' && text !== undefined && text !== null) {
@@ -243,22 +253,22 @@ export class BeautifyConsole {
       info: () => {
         this.info = showLog
           ? console.info.bind(this, ...this.infoPadStartText)
-          : (...parasm: any) => undefined;
+          : noop;
       },
       error: () => {
         this.error = showLog
           ? console.error.bind(this, ...this.errorPadStartText)
-          : (...parasm: any) => undefined;
+          : noop;
       },
       warn: () => {
         this.warn = showLog
           ? console.warn.bind(this, ...this.warnPadStartText)
-          : (...parasm: any) => undefined;
+          : noop;
       },
       log: () => {
         this.log = showLog
           ? console.log.bind(this, ...this.logPadStartText)
-          : (...parasm: any) => undefined;
+          : noop;
       },
     };
     // 如果传入了要修改的console日志类型，就只改对应的显示隐藏，否则就更改所有的
@@ -275,10 +285,10 @@ export class BeautifyConsole {
         this.warn = console.warn.bind(this, ...this.warnPadStartText);
         this.log = console.log.bind(this, ...this.logPadStartText);
       } else {
-        this.info = (...parasm: any) => undefined;
-        this.error = (...parasm: any) => undefined;
-        this.warn = (...parasm: any) => undefined;
-        this.log = (...parasm: any) => undefined;
+        this.info = noop;
+        this.error = noop;
+        this.warn = noop;
+        this.log = noop;
       }
     }
   }

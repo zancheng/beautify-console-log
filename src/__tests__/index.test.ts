@@ -1,5 +1,5 @@
 import { formatConsoleStr } from "../utils";
-import { ColorType, LogType } from "../beautify-console/model";
+import { BaseConfig, ColorType, LogType } from "../beautify-console/model";
 import BeautifyConsole from "../index";
 
 test("BeautifyConsole test", () => {
@@ -194,5 +194,195 @@ describe("console method binding", () => {
     const log = new BeautifyConsole();
     log.setPadStartText({ title: "T", logType: "info" });
     expect(log.info.name.startsWith("bound ")).toBe(true);
+  });
+});
+
+// 环境判断走 process.versions.node + 有无 window，测试里显式指定，避免依赖真实运行环境
+const originalNodeVersion = process.versions.node;
+const globals = global as unknown as Record<string, unknown>;
+const setProcessNode = (hasNode: boolean) => {
+  Object.defineProperty(process.versions, "node", {
+    value: hasNode ? originalNodeVersion : undefined,
+    configurable: true,
+  });
+};
+const setWindow = (hasWindow: boolean) => {
+  if (hasWindow) {
+    globals.window = {};
+  } else {
+    delete globals.window;
+  }
+};
+// node：有 process.versions.node 且没有 window
+const useNodeEnv = () => {
+  setProcessNode(true);
+  setWindow(false);
+};
+// 浏览器：没有 process.versions.node，有 window
+const useBrowserEnv = () => {
+  setProcessNode(false);
+  setWindow(true);
+};
+
+describe("badge colors", () => {
+  beforeEach(() => {
+    // node 分支输出 ANSI 转义序列
+    useNodeEnv();
+  });
+
+  afterEach(() => {
+    useNodeEnv();
+    jest.restoreAllMocks();
+  });
+
+  // 返回最后一次 info 调用的日志头前缀（node 环境下是 ANSI 字符串）
+  const infoPrefixAfter = (
+    style: { color: ColorType; bgColor: ColorType },
+    title = "T",
+  ) => {
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.setPadStartText({ title, logType: "info", style });
+    log.info("x");
+    const calls = spy.mock.calls;
+    return String(calls[calls.length - 1][0]);
+  };
+
+  test("same color and bgColor falls back to a contrasting text color", () => {
+    // 红底红字会看不见，应自动变成红底白字：[101;97;1m 而不是 [101;91;1m
+    expect(
+      infoPrefixAfter({ color: ColorType.red, bgColor: ColorType.red }),
+    ).toContain("[101;97;1m");
+  });
+
+  test("yellow / white background picks black text", () => {
+    expect(
+      infoPrefixAfter({ color: ColorType.yellow, bgColor: ColorType.yellow }),
+    ).toContain("[103;90;1m");
+  });
+
+  test("different color and bgColor are kept as is", () => {
+    expect(
+      infoPrefixAfter({ color: ColorType.white, bgColor: ColorType.purple }),
+    ).toContain("[105;97;1m");
+  });
+
+  test("omitting style restores the default colors", () => {
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.setPadStartText({
+      title: "T",
+      logType: "info",
+      style: { color: ColorType.red, bgColor: ColorType.red },
+    });
+    log.setPadStartText({ title: "T", logType: "info" });
+    log.info("x");
+    const calls = spy.mock.calls;
+    // info 默认是蓝底白字
+    expect(String(calls[calls.length - 1][0])).toContain("[104;97;1m");
+  });
+});
+
+describe("config", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("logType works as an alias of type", () => {
+    const infoSpy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const warnSpy = jest
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.config({ title: "T", logType: [LogType.info] });
+    infoSpy.mockClear();
+    warnSpy.mockClear();
+
+    log.info("show");
+    log.warn("hidden");
+
+    expect(infoSpy).toHaveBeenCalled();
+    expect(warnSpy).not.toHaveBeenCalled();
+    expect(String(infoSpy.mock.calls[0][0])).toContain("T");
+  });
+
+  test("a single type instead of an array does not throw", () => {
+    const log = new BeautifyConsole();
+    expect(() =>
+      log.config({ type: "info" } as unknown as BaseConfig),
+    ).not.toThrow();
+  });
+});
+
+describe("browser (%c) styling", () => {
+  // baseColor 用 isNodeEnv() 判断运行环境：没有 process.versions.node / 有 window 都算浏览器
+  beforeEach(() => {
+    useBrowserEnv();
+  });
+
+  afterEach(() => {
+    useNodeEnv();
+    jest.restoreAllMocks();
+  });
+
+  test("browser uses %c css styles instead of ansi", () => {
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.info("x");
+
+    const [format, badgeStyle, titleStyle] = spy.mock.calls[0];
+    expect(String(format)).toContain("%c INFO %c");
+    expect(String(badgeStyle)).toContain("background:#5555ff");
+    expect(String(badgeStyle)).toContain("color:#ffffff");
+    expect(String(titleStyle)).toContain("background:");
+  });
+
+  test("% in the title is escaped so it is not treated as a placeholder", () => {
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.setPadStartText({ title: "100% done", logType: "info" });
+    log.info("x");
+
+    const calls = spy.mock.calls;
+    expect(String(calls[calls.length - 1][0])).toContain("100%% done");
+  });
+
+  test("empty title drops the title segment", () => {
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.setPadStartText({ title: "", logType: "info" });
+    log.info("x");
+
+    const calls = spy.mock.calls;
+    // 没有标题时只有徽章的格式串和一条样式，不会出现第二个 %c
+    expect(String(calls[calls.length - 1][0])).toBe("%c INFO ");
+    expect(calls[calls.length - 1].length).toBe(3); // 格式串 + 样式 + 用户参数
+  });
+
+  test("a process shim with window is still treated as browser", () => {
+    // 浏览器里被注入 process 垫片时 process.versions.node 也会存在，
+    // 但有 window，应该继续走 %c
+    setProcessNode(true);
+    setWindow(true);
+
+    const spy = jest
+      .spyOn(console, "info")
+      .mockImplementation(() => undefined);
+    const log = new BeautifyConsole();
+    log.info("x");
+
+    expect(String(spy.mock.calls[0][0])).toContain("%c INFO %c");
   });
 });
