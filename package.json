@@ -79,5 +79,8 @@
     "src/**/*",
     "lib/**/*"
   ],
-  "repository": "https://github.com/zancheng/beautify-console-log.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zancheng/beautify-console-log.git"
+  }
 }
