@@ -7,6 +7,7 @@
 Due to most log beautification plugins not being able to locate the **code line**, I implemented this library myself.
 - This is a further beautification and encapsulation of the "console" object, including console. log console.info、console.warn、console.error。
 - It can display the number of rows where the log is printed, add custom console printing prefixes, and beautify the content (web side rule reference) [https://developer.mozilla.org/en-US/docs/Web/API/Console](https://developer.mozilla.org/en-US/docs/Web/API/Console) Node environment reference [https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97](https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97)） ）, can close console printing at any time, supports node environment.
+> How the header is colored: ANSI escape sequences in node, `%c` CSS styles in browsers (ANSI bright background codes 100-107 are not rendered by some browsers / older DevTools).
 > Please check the effect on the console.
 
 ## Menu
@@ -242,7 +243,7 @@ log.close(LogType.error).open(LogType.info).info('info...');
 |-------------------------------|-----------------------------|-----------------------------|
 |param|BaseConfig||
 |├──title                          |String?                       |Custom log header, do not display custom log header when the value is empty                   |
-|└──type                        |LogType[] \| ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
+|└──type                        |LogType[] \| ('info' 、 'log' 、 'warn' 、 'error')[]              |The type of log displayed, set to only display the corresponding log type(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`). The alias `logType` and a single type (e.g. `type: 'info'`) are also supported|
 ```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -368,6 +369,12 @@ log.setPadStartText({
     }
 }).log(1234)
 ```
+
+> Notes
+> - `style` only applies to the given `logType` and stays in effect until it is set again; omitting `style` restores that type's default colors (info: white on blue).
+> - Pass `title: ''` to hide the header text.
+> - When `color` and `bgColor` are the same (e.g. both `'red'`), the text color falls back to a contrasting color so the badge stays readable.
+> - Colors are rendered with console `%c` CSS styles in browsers and with ANSI escape sequences in node.
 
 ### reset
 After setting custom log headers or closing some logs, you can reset them through `log.reset()`.

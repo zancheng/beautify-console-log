@@ -5,6 +5,7 @@
 由于大部分日志美化插件都不能定位到**代码所在行**，所以我自己实现了这个库。
 - 这是“console”对象的进一步美化和封装，包括console.log、console.info、console.warn、console.error。
 - 可以显示日志打印的所在行数，可以加入自定义的console打印前缀、对内容进行美化（web端规则参考 [https://developer.mozilla.org/en-US/docs/Web/API/Console](https://developer.mozilla.org/en-US/docs/Web/API/Console) ，node环境参考 [https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97](https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97)）， 可随时关闭console打印，支持node环境。
+    > 日志头配色的实现方式：node 环境输出 ANSI 转义序列，浏览器环境使用 console 的 `%c` CSS 样式（ANSI 的亮色背景码 100-107 在部分浏览器/旧版 DevTools 上渲染不出来）。
     > 查看效果请在控制台。
 
 ## 目录
@@ -100,9 +101,13 @@ log.setPadStartText({
 console.log('------------------------------------------------')
 console.log('--------Set log header text and style-----------')
 
-log.setPadStartText('log', 'hello world:', {
-    color: 'red',
-    bgColor: 'green'
+log.setPadStartText({
+    title: "hello world:",
+    logType: LogType.log,
+    style: {
+        color: 'red',
+        bgColor: 'green'
+    }
 }).log(1234)
 log.log(1)
 
@@ -245,7 +250,7 @@ log.close(LogType.error).open(LogType.info).info('info...');
 |-------------------------------|-----------------------------|-----------------------------|
 |param|BaseConfig||
 |├──title                          |String?                       |自定义日志头，值为空时不显示"title"                   |
-|└──type                           |LogType[]  \| ('info' 、 'log' 、 'warn' 、 'error')[]             |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)|
+|└──type                           |LogType[]  \| ('info' 、 'log' 、 'warn' 、 'error')[]             |显示的日志类型，设置后只显示对应的日志类型(`LogType.info`、`LogType.log`、`LogType.warn`、`LogType.error`、`"info"`、`"log"`、`"warn"`、`"error"`)。支持别名 `logType`，也支持传单个类型（如 `type: 'info'`）|
 ```javascript
 import BeautifyConsole from "beautify-console-log";
 import { LogType } from 'beautify-console-log/lib/beautify-console/model';
@@ -371,6 +376,12 @@ log.setPadStartText({
     }
 }).log(1234)
 ```
+
+> 说明
+> - `style` 只作用于传入的 `logType`，会一直生效到下次设置；不传 `style` 时该类型会恢复默认配色（info 默认蓝底白字）。
+> - `title` 传空字符串 `''` 时不显示日志头文本。
+> - `color` 与 `bgColor` 相同时（例如都传 `'red'`），字色会自动换成对比色，避免文字和背景融为一体。
+> - 浏览器端颜色通过 console 的 `%c` CSS 样式渲染，node 端使用 ANSI 转义序列。
 
 ### reset
 当设置自定义日志头或关闭部分日志等操作后，可以通过`log.reset()`重置。

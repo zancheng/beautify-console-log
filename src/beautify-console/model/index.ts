@@ -9,6 +9,8 @@
  */
 export interface BaseConfig {
   type?: LogType[] | ("info" | "log" | "warn" | "error")[];
+  /** type 的别名，兼容 logType 写法（都传时以 type 为准） */
+  logType?: LogType[] | ("info" | "log" | "warn" | "error")[];
   title?: string;
 }
 /**
