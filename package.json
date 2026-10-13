@@ -76,8 +76,10 @@
   },
   "files": [
     "dist/**/*",
-    "src/**/*",
-    "lib/**/*"
+    "lib/**/*",
+    "src/index.ts",
+    "src/utils/**/*",
+    "src/beautify-console/**/*"
   ],
   "repository": {
     "type": "git",

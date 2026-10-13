@@ -1,0 +1,14 @@
+# Tests
+src/__tests__/
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+
+# Coverage & debug output
+coverage/
+.nyc_output/
+.webpack-test/
+
+# Dependencies
+node_modules/
